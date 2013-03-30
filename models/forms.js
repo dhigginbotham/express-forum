@@ -10,3 +10,18 @@ forms.register = [
   {name: 'last_name', type: 'text', std: 'Last Name', ctx: null, desc: null, db: 'last_name'},
   {name: 'title', type: 'string', std: 'Please Sign In'}
 ];
+
+forms.forum = [
+
+/*
+  spec would be
+  @param name
+  @param type
+  @param std
+  @param ctx
+  @param desc
+  @param db
+  
+*/
+
+];

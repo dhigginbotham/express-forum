@@ -10,6 +10,7 @@
     "mmm": "0.2.x",
     "mongoose": "*",
     "mongoose-auth": "*",
-    "less-middleware": "*"
+    "less-middleware": "*",
+    "socket.io": "*"
   }
 }

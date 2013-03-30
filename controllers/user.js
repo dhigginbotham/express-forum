@@ -47,10 +47,14 @@ exports.add = function (req, res) {
  */
 
 exports.register = function (req, res) {
+
+  //get shorter reference of register form model
   var register = Forms.register;
 
+  //render our form from the model
   FormsHandler.render(register, function (form) {
 
+    //load js & css
     que.render(req, function (queued) {
 
       res.render('pages/register', {
@@ -60,7 +64,7 @@ exports.register = function (req, res) {
         que: {
           head: queued.head,
           foot: queued.foot
-        } 
+        }
       });
     });
   });

@@ -32,7 +32,7 @@ que.render = function (req, cb) {
 
     var ctx = scripts[i];
     
-    if (loaded.head[ctx.type] || loaded.foot[ctx.type] && ctx.uri === req.route.path || (!ctx.uri)) {
+    if (loaded.head[ctx.type] || loaded.foot[ctx.type] && (ctx.uri === req.route.path || ctx.uri === null)) {
       loaded[ctx.where][ctx.type].push(ctx);
     }
   }

@@ -2,14 +2,14 @@
 /**
  * Module dependencies.
  */
-
 var express = require('express'),
-  controllers = require('./controllers'),
-  user = require('./controllers/user'),
-  http = require('http'),
-  path = require('path');
+    app = express(),
+    server = require('http').createServer(app),
+    io = require('socket.io').listen(server);
 
-var app = express();
+var controllers = require('./controllers'),
+    user = require('./controllers/user'),
+    path = require('path');
 
 app.configure(function () {
   app.set('port', process.env.PORT || 3000);
@@ -41,6 +41,6 @@ app.get('/users/view', user.list);
 app.post('/users', user.add);
 app.get('/register', user.register);
 
-http.createServer(app).listen(app.get('port'), function () {
+server.listen(app.get('port'), function () {
   console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
 });
