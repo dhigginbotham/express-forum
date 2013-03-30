@@ -6,13 +6,13 @@
 var User = require('../models/db').User;
 var Forms = require('../models/forms');
 
-var que = require('./scripts');
 
 /*
   define shared controllers
 */
 
-var FormsHandler = require('./forms');
+var que = require('../lib/que');
+var form = require('../lib/forms');
 
 /*
  * GET users listing.
@@ -52,10 +52,10 @@ exports.register = function (req, res) {
   var register = Forms.register;
 
   //render our form from the model
-  FormsHandler.render(register, function (form) {
+  form.render(register, function (form) {
 
     //load js & css
-    que.render(req, function (queued) {
+    que.embed(req, function (queued) {
 
       res.render('pages/register', {
         title: 'Registration Page',

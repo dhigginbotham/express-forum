@@ -3,13 +3,13 @@
  * Module dependencies.
  */
 var express = require('express'),
-    app = express(),
-    server = require('http').createServer(app),
-    io = require('socket.io').listen(server);
+  app = express(),
+  server = require('http').createServer(app),
+  io = require('socket.io').listen(server);
 
 var controllers = require('./controllers'),
-    user = require('./controllers/user'),
-    path = require('path');
+  user = require('./controllers/user'),
+  path = require('path');
 
 app.configure(function () {
   app.set('port', process.env.PORT || 3000);
@@ -21,7 +21,7 @@ app.configure(function () {
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser('Fee-fi-fo-fum'));
-  app.use(express.session());
+  app.use(express.session({ secret: 'Fee-fi-fo-fum'}));
   app.use(app.router);
   app.use(require('less-middleware')({ src: __dirname + '/public' }));
   app.use(express.static(path.join(__dirname, 'public')));

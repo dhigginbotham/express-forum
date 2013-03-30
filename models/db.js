@@ -28,14 +28,14 @@ function validatePresenceOf(value) {
 
 var UserSchema = new Schema({
   id: { type: ObjectId, index: true },
-  username: { type: String, validate: [validatePresenceOf, ' is required'] },
-  hash: String,
-  first_name: { type: String, validate: [validatePresenceOf, ' is required'] },
+  username: { type: String, required: true, unique: true },
+  hash: { type: String, required: true },
+  first_name: { type: String },
   last_name: String,
-  email: { type: String, validate: [validatePresenceOf, ' is required'] },
+  email: { type: String, required: true, unique: true },
   logcount: Number,
-  created: Date,
-  updated: Date
+  created: { type: Date, default: Date.now },
+  updated: { type: Date, default: Date.now }
 });
 
 /*
@@ -44,11 +44,11 @@ var UserSchema = new Schema({
 
 var ForumSchema = new Schema({
   id: { type: ObjectId, index: true }, //++i
-  name: { type: String, validate: [validatePresenceOf, ' is required'] }, //string 50
+  name: { type: String, required: true }, //string 50
   slug: String, //string 50
   desc: String, //string 255
-  updated: Date, //datetime
-  created: Date //datetime
+  updated: { type: Date, default: Date.now }, //datetime
+  created: { type: Date, default: Date.now } //datetime
 });
 
 /*
@@ -59,13 +59,13 @@ var TopicSchema = new Schema({
   id: { type: ObjectId, index: true }, //forum the msg is posted in
   forum: { type: ObjectId }, //++i
   user: {}, //user id
-  title: { type: String, validate: [validatePresenceOf, ' is required'] }, //string 200
+  title: { type: String, required: true }, //string 200
   slug: String, //string 200
-  created: Date, //datetime
-  updated: Date, //datetime
+  created: { type: Date, default: Date.now }, //datetime
+  updated: { type: Date, default: Date.now }, //datetime
   count: Number, //int
   parent: { type: ObjectId }, //int
-  message: { type: String, validate: [validatePresenceOf, ' is required'] } //text
+  message: { type: String, required: true } //text
 });
 
 /*
@@ -75,10 +75,10 @@ var TopicSchema = new Schema({
 var MessageSchema = new Schema({
   id: { type: ObjectId, index: true }, //++i
   from: String, //user id from
-  to: { type: String, validate: [validatePresenceOf, ' is required'] }, //user id to
-  title: { type: String, validate: [validatePresenceOf, ' is required'] }, //string 200
-  created: Date, //datetime
-  msg: { type: String, validate: [validatePresenceOf, ' is required'] } //string 500
+  to: { type: String, required: true }, //user id to
+  title: { type: String, required: true }, //string 200
+  created: { type: Date, default: Date.now }, //datetime
+  msg: { type: String, required: true } //string 500
 });
 
 /*

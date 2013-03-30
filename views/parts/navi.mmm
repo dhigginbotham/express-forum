@@ -1,0 +1,17 @@
+<div class="navbar navbar-inverse">
+  <div class="navbar-inner">
+    <a class="brand" href="#">{{title}}</a>
+    <div class="nav-collapse collapse">
+      <ul class="nav pull-right">
+        {{#nav}}
+          <li{{#cur?}} class="{{cur}}"{{/cur?}}>
+            <a href="{{href}}" id="navigation-{{id}}">{{#icon}}<i class="icon-{{icon}}"></i> {{/icon}}{{std}}</a>
+          </li>
+        {{/nav}}
+        {{^nav}}
+        <li><a href="/auth">Login</a></li>
+        {{/nav}}
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>

@@ -1,5 +1,5 @@
 var SignUpClass = (function() {
-  // var socket = io.connect();
+  var socket = io.connect();
   var s;
 
     return {
@@ -15,8 +15,8 @@ var SignUpClass = (function() {
       },
       bind: function() {
         s.reg.bind('click', function() {
-          console.log('clicked');
-          // socket.emit('register', s.form.serializeArray());
+          // console.log('clicked');
+          socket.emit('register', s.form.serializeArray());
         });
       }
     }

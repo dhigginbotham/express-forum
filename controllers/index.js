@@ -1,20 +1,26 @@
-
-var que = require('./scripts');
-
+/*
+  add additional middleware
+*/
+var que = require('../lib/que');
+var navi = require('../lib/navi');
 /*
  * GET home page.
  */
 
-exports.index = function(req, res){
+exports.index = function (req, res) {
   //render js & css
-  que.render(req, function(queued) {
+  navi.gator(req, function (gator) {
 
-    res.render('pages/index', { 
-      title: 'Node Forum',
-      que: {
-        head: queued.head,
-        foot: queued.foot
-      }
+    que.embed(req, function (queued) {
+
+      res.render('pages/index', {
+        title: 'Node Forum',
+        que: {
+          head: queued.head,
+          foot: queued.foot
+        },
+        nav: gator
+      });
     });
   });
 };
