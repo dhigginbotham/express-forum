@@ -1,0 +1,13 @@
+<h1>{{ title }}</h1>
+<p>Currently testing stuff, enjoy!</p>
+
+  <form class="form-signin" id="login-form" method="post">
+    <h2 class="form-signin-heading"></h2>
+
+    {{#form.text}}
+      <input type="text" class="input input-block-level" name="{{name}}" placeholder="{{std}}" {{#ctx?}}value="{{ctx}}"{{/ctx?}} />
+    {{/form.text}}
+
+    <button class="btn btn-large btn-primary" type="submit" id="login">Sign in</button>
+    <button class="btn btn-large btn-success pull-right" type="submit" id="register">Register</button>
+  </form>
