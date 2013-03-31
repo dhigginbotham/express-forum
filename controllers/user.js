@@ -46,7 +46,7 @@ exports.add = function (req, res) {
 
     var user = new User({
       username : req.body.username,
-      hash: hashed,
+      salt: salted,
       first_name: req.body.first_name || null,
       last_name: req.body.last_name || null,
       email: req.body.email

@@ -29,7 +29,7 @@ function validatePresenceOf(value) {
 var UserSchema = new Schema({
   id: { type: ObjectId, index: true },
   username: { type: String, required: true, unique: true },
-  hash: { type: String, required: true },
+  salt: { type: String, required: true },
   first_name: { type: String },
   last_name: String,
   email: { type: String, required: true, unique: true },
