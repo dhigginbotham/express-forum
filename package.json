@@ -12,6 +12,7 @@
     "mongoose-auth": "*",
     "less-middleware": "*",
     "socket.io": "*",
-    "pwd": "*"
+    "pwd": "*",
+    "shot": "*"
   }
 }

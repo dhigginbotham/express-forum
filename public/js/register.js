@@ -11,7 +11,7 @@ var SignUpClass = (function() {
       init: function() {
         s = this.settings;
         SignUpClass.bind();
-        HelperClass.DisableForm('#login-form');
+        // HelperClass.DisableForm('#login-form');
       },
       bind: function() {
         s.reg.bind('click', function() {

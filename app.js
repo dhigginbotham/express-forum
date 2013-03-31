@@ -2,10 +2,10 @@
 /**
  * Module dependencies.
  */
-var express = require('express'),
-  app = express(),
-  server = require('http').createServer(app),
-  io = require('socket.io').listen(server);
+var express = require('./server').express;
+var app = require('./server').app;
+var server = require('./server').server;
+var io = require('./server').io;
 
 var controllers = require('./controllers'),
   user = require('./controllers/user'),
@@ -21,7 +21,7 @@ app.configure(function () {
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser('Fee-fi-fo-fum'));
-  app.use(express.session({ secret: 'Fee-fi-fo-fum'}));
+  app.use(express.session());
   app.use(app.router);
   app.use(require('less-middleware')({ src: __dirname + '/public' }));
   app.use(express.static(path.join(__dirname, 'public')));

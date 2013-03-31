@@ -1,8 +1,6 @@
-<h1>{{ title }}</h1>
-<p>Currently testing stuff, enjoy!</p>
 
-  <form class="form-signin" id="login-form" method="post">
-    <h2 class="form-signin-heading"></h2>
+  <form class="form-signin" id="login-form" method="post" action="/users">
+    <h2 class="form-signin-heading">{{#form.string}}{{std}}{{/form.string}}</h2>
 
     {{#form.text}}
       <input type="text" class="input input-block-level" name="{{name}}" placeholder="{{std}}" {{#ctx?}}value="{{ctx}}"{{/ctx?}} />
