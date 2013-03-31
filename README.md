@@ -1,9 +1,9 @@
-###node-forum
-Node.js needed a fun forum app with some new flashy technology. So here's my go at making a forum that takes advantage of Node.js w/ Express.js, Socket.IO and uses Bootstrap for it's UI. I've got awhile to go, but if you're interested in contributing shoot me a pull request. Fundamentals, and coding practices you will see in this project will be a little mix of a couple different Styles, however I do tend to be fairly consistant and I will work on documenting this project much better.
+###node-forum / express-forum
+Node.js needed a fun forum app with some new flashy technology. So here's my go at making a forum that takes advantage of Node.js w/ Hapi.js as well as Express.js frameworks, [Socket.IO](http://socket.io/) and uses [Bootstrap](http://twitter.github.com/bootstrap/) for it's UI. *I've got awhile to go*, but if you're interested in contributing shoot me a pull request. Fundamentals, and coding practices you will see in this project will be a little mix of a couple different Styles, however I do tend to be fairly consistant and I will work on documenting this project much better.
 
 ###Express Forum Differences
 
-- the express build is currently using mongoose
+- the express build is currently using mongoose instead of mongoskin
 - updated libs, JSLint passing mostly now
 - token system is currently using pwd from the one and only tj
 - bit closer to MVC, easier to follow outside in
