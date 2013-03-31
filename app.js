@@ -40,6 +40,7 @@ app.get('/', controllers.index);
 app.get('/users/view', user.list);
 app.post('/users', user.add);
 app.get('/register', user.register);
+app.get('/login', user.login);
 
 server.listen(app.get('port'), function () {
   console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);

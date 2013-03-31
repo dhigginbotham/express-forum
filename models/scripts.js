@@ -19,7 +19,7 @@ scripts.files = [
   //header css
   {src : '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css', name : 'bootstrap.css', where : 'head', uri : null, type : 'css'},
   {src : '//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css', name : 'font-awesome.css', where : 'head', uri : null, type : 'css'},
-  {src : '/css/login.css', name : 'login.css', where : 'head', uri : '/register', type : 'css'},
+  {src : '/css/login.css', name : 'login.css', where : 'head', uri : null, type : 'css'},
   // {src : '/css/footer.css', name : 'footer.css', where : 'head', uri : null, type : 'css'},
 
   //footer scripts

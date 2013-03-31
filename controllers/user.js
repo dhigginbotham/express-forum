@@ -18,7 +18,6 @@ var io = require('../server').io;
 
 var que = require('../lib/que');
 var form = require('../lib/forms');
-var inject = require('../lib/shot');
 var token = require('../lib/hash');
 
 /*
@@ -36,12 +35,11 @@ exports.list = function (req, res) {
  */
 
 exports.add = function (req, res) {
-  console.log(req.body);
-  token.make(req.body.hash, function (err, salted, hashed) {
-
+  token.make(req, req.body.hash, function (err, salted, hashed) {
+    
     if (err) {
       console.log('err');
-      console.log(err);
+      return console.log(err);
     }
 
     var user = new User({
@@ -51,14 +49,15 @@ exports.add = function (req, res) {
       last_name: req.body.last_name || null,
       email: req.body.email
     });
+
     user.save(function (err) {
       if (!err) {
-        req.session.messages = 'created';
+        req.session.salt = salted;
         res.redirect('/');
       } else {
         console.log(err);
-        req.session.messages = 'error';
-        res.redirect('/register');
+        req.session.messages = {cls: ' alert-block', title: 'Error!', msg: 'looks like we had an issue registering your account, please try again'};
+        res.redirect('/register#error');
       }
     });
   });
@@ -88,15 +87,47 @@ exports.register = function (req, res) {
         }
       });
       //start socket.io
-      io.sockets.on('connection', function (socket) {
+  /*      io.sockets.on('connection', function (socket) {
 
-        socket.on('register', function (data) {
-          // form.match(data, function (matched) {
-          //   console.log(matched);
-          // });
-          console.log(data);
-        });
+          socket.on('register', function (data) {
+            console.log(data);
+          });
+        });*/
+      //end socket.io
+    });
+  });
+};
+
+exports.login = function (req, res) {
+
+  if (req.session.user) {
+    console.log(req.session.user);
+  }
+
+  //get shorter reference of register form model
+  var login = Forms.login;
+
+  //render our form from the model
+  form.render(login, function (f) {
+
+    //load js & css
+    que.embed(req, function (queued) {
+      res.render('pages/login', {
+        title: 'Registration Page',
+        flash: req.session.messages,
+        form: f,
+        que: {
+          head: queued.head,
+          foot: queued.foot
+        }
       });
+      //start socket.io
+  /*      io.sockets.on('connection', function (socket) {
+
+          socket.on('login', function (data) {
+            console.log(data);
+          });
+        });*/
       //end socket.io
     });
   });
