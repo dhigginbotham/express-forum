@@ -51,8 +51,6 @@ exports.add = function (req, res) {
       last_name: req.body.last_name || null,
       email: req.body.email
     });
-
-    user.created = new Date();
     user.save(function (err) {
       if (!err) {
         req.session.messages = 'created';
