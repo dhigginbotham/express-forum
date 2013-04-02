@@ -3,7 +3,6 @@
 */
 var que = require('../lib/que');
 var navi = require('../lib/navi');
-var cookie = require('../lib/cookies');
 /*
  * GET home page.
  */

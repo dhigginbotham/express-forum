@@ -132,12 +132,11 @@ var Forum = exports.Forum = mongoose.model('Forum', ForumSchema);
 var Topic = exports.Topic = mongoose.model('Topic', TopicSchema);
 var Message = exports.Message = mongoose.model('Message', MessageSchema);
 
-var usr = new User({ username: 'dhz2', email: 'david@hillsoft.com', password: 'secret', admin: true });
-usr.save(function(err) {
-  if(err) {
-    console.log(err);
-  } else {
-    console.log('user: ' + usr.username + " saved.");
-  }
-});
-
+// var usr = new User({ username: 'dhz2', email: 'david@hillsoft.com', password: 'secret', admin: true });
+// usr.save(function(err) {
+//   if(err) {
+//     console.log(err);
+//   } else {
+//     console.log('user: ' + usr.username + " saved.");
+//   }
+// });
