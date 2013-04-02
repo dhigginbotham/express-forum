@@ -18,7 +18,7 @@ var ObjectId = mongoose.SchemaTypes.ObjectId;
 
 mongoose.connect('mongodb://localhost/xfm'); //todo - change to process.env
   
-var db = mongoose.connection;
+var db = mongoose.connection; //export this
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback() {

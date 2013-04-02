@@ -30,7 +30,7 @@ This project is now in both [Express.js](https://github.com/dhigginbotham/expres
 ###API Routes
 These are a work in progress, basically drawing board until I make some real definitions
 ```
-  /account
+  /a || /u
     /new
     /delete
     /update
@@ -52,6 +52,16 @@ These are a work in progress, basically drawing board until I make some real def
       /delete
       /update
       /view
+
+  example: :forum/new
+  example: :forum/delete
+  example: :forum/update
+  example: :forum (defaults to /view)
+
+  example: :forum/:topic/new
+  example: :forum/:topic/delete
+  example: :forum/:topic/update
+  example: :forum/:topic (defaults to /view)
 
   /login
   /register
