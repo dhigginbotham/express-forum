@@ -2,9 +2,9 @@
     <h2 class="form-signin-heading">{{#form.string}}{{std}}{{/form.string}}</h2>
 
     {{#flash}}
-      <div class="alert{{cls}}">
+      <div class="alert">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{msg}}
+        {{flash}}
       </div>
     {{/flash}}
 

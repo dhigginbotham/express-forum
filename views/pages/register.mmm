@@ -1,10 +1,10 @@
-  <form class="form-signin" id="login-form" method="post" action="/users">
+  <form class="form-signin" id="login-form" method="post" action="/register">
     <h2 class="form-signin-heading">{{#form.string}}{{std}}{{/form.string}}</h2>
 
     {{#flash}}
-      <div class="alert">
+      <div class="alert{{cls}}">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{#message}}{{message}}{{/message}}
+        {{msg}}
       </div>
     {{/flash}}
 

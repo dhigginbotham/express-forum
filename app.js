@@ -16,7 +16,7 @@ var controllers = require('./controllers'),
   path = require('path');
 
 app.configure(function () {
-  app.set('port', process.env.PORT || 3000);
+  app.set('port', process.env.PORT);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'mmm');
   app.set('layout', 'layout');
@@ -38,6 +38,7 @@ app.configure('production', function () {
 });
 
 app.configure('development', function () {
+  app.set('port', 3001)
   app.set('db uri', 'localhost/xfm');
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
@@ -47,15 +48,18 @@ app.configure('development', function () {
 app.get('/', controllers.index);
 
 // User pages
-app.get('/account', pass.ensureAuthenticated, user_routes.account);
+
 app.get('/login', user_routes.getlogin);
-app.get('/admin', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes.admin);
 app.post('/login', user_routes.postlogin);
+
+app.get('/account', pass.ensureAuthenticated, user_routes.account);
+app.get('/admin', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes.admin);
+
 app.get('/logout', user_routes.logout);
 
 //user routes
 app.get('/register', user_routes.register);
-app.post('/users', user_routes.add);
+app.post('/register', user_routes.add);
 
 server.listen(app.get('port'), function () {
   console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);

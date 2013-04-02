@@ -7,6 +7,7 @@ Node.js needed a fun forum app with some new flashy technology. So here's my go 
 - updated libs, JSLint passing mostly now
 - token system is currently using pwd from the one and only tj
 - bit closer to MVC, easier to follow outside in
+- passport.js module built in
 
 I'm leaning towards refactoring to fit within [Hapi.js](https://github.com/spumko/hapi/blob/master/docs/Style.md) style guide. It's pretty clean.
 
@@ -15,7 +16,6 @@ This project is now in both [Express.js](https://github.com/dhigginbotham/expres
 
 ###Todos
 
-- mongoose-auth module
 - socket.io pattern for updates like [Hapi.js - Shot](https://github.com/spumko/shot)
 - crud api methods and routes
 - scope issue, might sleep on it 
@@ -27,7 +27,7 @@ This project is now in both [Express.js](https://github.com/dhigginbotham/expres
 - Views: Create, Edit, View, Profile, Message, Photos/Media
 
 ###Version
-0.0.8
+0.0.9
 
 ###License
 (The MIT License)

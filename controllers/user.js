@@ -20,6 +20,7 @@ var io = require('../server').io;
 
 var que = require('../lib/que');
 var form = require('../lib/forms');
+var navi = require('../lib/navi');
 
 /*
  * POST users listing.
@@ -80,7 +81,22 @@ exports.register = function (req, res) {
 
 
 exports.account = function(req, res) {
-  res.render('pages/account', { user: req.user });
+  //render js & css
+  navi.gator(req, function (gator) {
+
+    que.embed(req, function (queued) {
+
+      res.render('pages/account', {
+        title: 'Welcome ',
+        que: {
+          head: queued.head,
+          foot: queued.foot
+        },
+        nav: gator,
+        user: req.user
+      });
+    });
+  });
 };
 
 exports.getlogin = function(req, res) {
@@ -110,7 +126,22 @@ exports.getlogin = function(req, res) {
 };
 
 exports.admin = function(req, res) {
-  res.send('access granted admin!');
+  //render js & css
+  navi.gator(req, function (gator) {
+
+    que.embed(req, function (queued) {
+
+      res.render('pages/admin', {
+        title: 'Welcome ',
+        que: {
+          head: queued.head,
+          foot: queued.foot
+        },
+        nav: gator,
+        user: req.user
+      });
+    });
+  });
 };
 
 // POST /login

@@ -1,4 +1,2 @@
 {{> parts/navi}}
 
-<h1>{{ title }}</h1>
-<p>Currently testing stuff, enjoy!</p>
