@@ -39,7 +39,6 @@ exports.ensureAuthenticated = function ensureAuthenticated(req, res, next) {
 // You can delete this if you use different method to check for admins or don't need admins
 exports.ensureAdmin = function ensureAdmin(req, res, next) {
     return function(req, res, next) {
-  console.log(req.user);
         if(req.user && req.user.admin === true)
             next();
         else

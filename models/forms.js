@@ -3,7 +3,6 @@
 var forms = module.exports = {};
 
 /*
-
   vars
 
   @param name
@@ -16,7 +15,6 @@ var forms = module.exports = {};
   @param form_id
   @param form_hash (nonce style)
   @param socket_event
-  
 */
 
 forms.register = [
