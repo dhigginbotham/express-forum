@@ -79,7 +79,6 @@ exports.register = function (req, res) {
   });
 };
 
-
 exports.account = function(req, res) {
   //render js & css
   navi.gator(req, function (gator) {
@@ -126,19 +125,29 @@ exports.getlogin = function(req, res) {
 };
 
 exports.admin = function(req, res) {
-  //render js & css
-  navi.gator(req, function (gator) {
 
-    que.embed(req, function (queued) {
+  var settings = Forms.settings;
 
-      res.render('pages/admin', {
-        title: 'Welcome ',
-        que: {
-          head: queued.head,
-          foot: queued.foot
-        },
-        nav: gator,
-        user: req.user
+  //render our form from the model
+  form.render(settings, function (f) {
+    //render js & css
+    navi.gator(req, function (gator) {
+
+      que.embed(req, function (queued) {
+
+        res.render('pages/admin', {
+          title: 'Welcome ',
+          que: {
+            head: queued.head,
+            foot: queued.foot
+          },
+          nav: gator,
+          user: req.user,
+          form: {
+            settings: f
+          },
+          flash: req.session.messages
+        });
       });
     });
   });

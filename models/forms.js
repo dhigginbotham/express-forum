@@ -49,3 +49,11 @@ forms.login = [
   {name: 'password', type: 'password', std: 'Password', ctx: null, desc: 'Strongly suggested not to use the same password as the forum!', db: 'password'},
   {name: 'title', type: 'string', std: 'Login Box'}
 ];
+
+forms.settings = [
+  {name: 'username', type: 'text', std: 'username', ctx: null, db: 'username'},
+  {name: 'title', type: 'text', std: 'title', ctx: null, db: 'title'},
+  {name: 'first_name', type: 'text', std: 'first_name', ctx: null, db: 'first_name'},
+  {name: 'email', type: 'text', std: 'email', ctx: null, db: 'email'},
+  {name: 'last_name', type: 'text', std: 'last_name', ctx: null, db: 'last_name'}
+];
