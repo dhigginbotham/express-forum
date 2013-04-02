@@ -1,18 +1,19 @@
 ###node-forum / express-forum
-Node.js needed a fun forum app with some new flashy technology. So here's my go at making a forum that takes advantage of Node.js w/ Hapi.js as well as Express.js frameworks, [Socket.IO](http://socket.io/) and uses [Bootstrap](http://twitter.github.com/bootstrap/) for it's UI. *I've got awhile to go*, but if you're interested in contributing shoot me a pull request. Fundamentals, and coding practices you will see in this project will be a little mix of a couple different Styles, however I do tend to be fairly consistant and I will work on documenting this project much better.
+Node.js needed a fun forum app with some new flashy technology. So here's my go at making a forum that takes advantage of Node.js w/ [Hapi.js](https://github.com/spumko/hapi) as well as Express.js frameworks, [Socket.IO](http://socket.io/) and uses [Bootstrap](http://twitter.github.com/bootstrap/) for it's UI. *I've got awhile to go*, but if you're interested in contributing shoot me a pull request. Fundamentals, and coding practices you will see in this project will be a little mix of a couple different Styles, however I do tend to be fairly consistant and I will work on documenting this project much better.
 
 ###Express Forum Differences
 
 - the express build is currently using mongoose instead of mongoskin
-- updated libs, JSLint passing mostly now
-- token system is currently using pwd from the one and only tj
-- bit closer to MVC, easier to follow outside in
+- updated libs, JSLint passing mostly now (of course not all of it, there's a lot of hybrid syntax and reserved names that will always make her upset...)
+- bit closer to MVC (don't hold me to this... my brain machine feels like i need more folders)
 - passport.js module built in (local strategy for now, planning on the big four ['github','facebook','twitter','github<3'])
 
 I'm leaning towards refactoring to fit within [Hapi.js](https://github.com/spumko/hapi/blob/master/docs/Style.md) style guide. It's pretty clean.
 
 ###Updates
 This project is now in both [Express.js](https://github.com/dhigginbotham/express-forum) and [Hapi.js](https://github.com/dhigginbotham/node-forum) frameworks. I felt it was easy enough to keep them in fair parody.
+
+4/2/2013 - Parody `failed` for now, I have to do some research on a couple of Hapi.js plugins and of course refactor some more Express.js code to hapi.js
 
 ###Todos
 
@@ -29,38 +30,32 @@ This project is now in both [Express.js](https://github.com/dhigginbotham/expres
 ###API Routes
 These are a work in progress, basically drawing board until I make some real definitions
 ```
-
   /account
     /new
     /delete
     /update
     /view
 
-  /admin
-    /view
+  inherit next from parent id/slug?
+  .../forums
+      /new
+      /delete
+      /update
+      /view
+  .../topics
+      /new
+      /delete
+      /update
+      /view
+  .../messages
+      /new
+      /delete
+      /update
+      /view
 
   /login
   /register
   /logout
-
-  inherit parent form id/slug?
-
-  .../forums
-        /new
-        /delete
-        /update
-        /view
-  .../topics
-        /new
-        /delete
-        /update
-        /view
-  .../messages
-        /new
-        /delete
-        /update
-        /view
-
 ```
 ###Version
 0.0.9
