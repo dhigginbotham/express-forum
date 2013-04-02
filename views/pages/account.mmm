@@ -14,8 +14,8 @@
     </ul>
 
     <div class="tab-content">
-      <div class="tab-pane fade in" id="settings">
-        <form class="form-signin" id="login-form" method="post" action="/account">
+      <div class="tab-pane fade in active" id="settings">
+        <form id="login-form" method="post" action="/account">
           {{#flash}}
             <div class="alert">
               <button type="button" class="close" data-dismiss="alert">&times;</button>

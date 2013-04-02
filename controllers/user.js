@@ -7,12 +7,13 @@ var passport = require('passport');
 
 var User = require('../models/db').User;
 var Forms = require('../models/forms');
+var Scripts = require('../models/scripts');
 
 /*
   define shared server vars
 */
 
-var io = require('../server').io;
+var io = require('../conf/server').io;
 
 /*
   define shared controllers
@@ -57,12 +58,13 @@ exports.register = function (req, res) {
 
   //get shorter reference of register form model
   var register = Forms.register;
+  var scripts = Scripts.files;
 
   //render our form from the model
   form.render(register, function (f) {
 
     //load js & css
-    que.embed(req, function (queued) {
+    que.embed(req, scripts, function (queued) {
       res.render('pages/register', {
         title: 'Registration Page',
         flash: req.session.messages,
@@ -83,14 +85,14 @@ exports.account = function(req, res) {
 
   //get shorter reference of register form model
   var settings = Forms.settings;
-
+  var scripts = Scripts.files;
   //render our form from the model
   form.render(settings, function (f) {
 
     //render js & css
     navi.gator(req, function (gator) {
 
-      que.embed(req, function (queued) {
+      que.embed(req, scripts, function (queued) {
 
         res.render('pages/account', {
           title: 'Welcome ',
@@ -113,12 +115,12 @@ exports.account = function(req, res) {
 exports.getlogin = function(req, res) {
   //get shorter reference of register form model
   var login = Forms.login;
-
+  var scripts = Scripts.files;
   //render our form from the model
   form.render(login, function (f) {
 
     //load js & css
-    que.embed(req, function (queued) {
+    que.embed(req, scripts, function (queued) {
       res.render('pages/login', {
         title: 'Registration Page',
         flash: req.session.messages,
@@ -139,13 +141,13 @@ exports.getlogin = function(req, res) {
 exports.admin = function(req, res) {
 
   var settings = Forms.settings;
-
+  var scripts = Scripts.files;
   //render our form from the model
   form.render(settings, function (f) {
     //render js & css
     navi.gator(req, function (gator) {
 
-      que.embed(req, function (queued) {
+      que.embed(req, scripts, function (queued) {
 
         res.render('pages/admin', {
           title: 'Welcome ',

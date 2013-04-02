@@ -2,10 +2,10 @@
 /**
  * Module dependencies.
  */
-var express = require('./server').express;
-var app = require('./server').app;
-var server = require('./server').server;
-var io = require('./server').io;
+var express = require('./conf/server').express;
+var app = require('./conf/server').app;
+var server = require('./conf/server').server;
+var io = require('./conf/server').io;
 
 var db = require('./models/db'), 
   pass = require('./conf/pass'),
@@ -13,6 +13,7 @@ var db = require('./models/db'),
 
 var controllers = require('./controllers'),
   user_routes = require('./controllers/user'),
+  crud_routes = require('./controllers/crud'),
   path = require('path');
 
 app.configure(function () {
@@ -53,6 +54,8 @@ app.post('/login', user_routes.postlogin);
 
 app.get('/account', pass.ensureAuthenticated, user_routes.account);
 app.post('/account', pass.ensureAuthenticated, user_routes.postAccount);
+
+app.get('/f/create', pass.ensureAuthenticated, crud_routes.get.create);
 
 app.get('/admin', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes.admin);
 

@@ -61,6 +61,11 @@ var HelperClass = (function() {
 
         socket.emit(event, data);
       });
+    },
+    NicEditor: function() {
+      bkLib.onDomLoaded(function() {
+        new nicEditor({buttonList : ['fontSize','bold','italic','underline','strikeThrough','subscript','superscript','html']}).panelInstance('contents');
+      });
     }
   }
 })();

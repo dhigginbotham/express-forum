@@ -1,4 +1,3 @@
-//./server.js
 var express = exports.express = require('express');
 var app = exports.app = express();
 var server = exports.server = require('http').createServer(app);
