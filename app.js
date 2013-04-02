@@ -39,7 +39,6 @@ app.configure('production', function () {
 
 app.configure('development', function () {
   app.set('port', 3001)
-  app.set('db uri', 'localhost/xfm');
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
@@ -53,6 +52,8 @@ app.get('/login', user_routes.getlogin);
 app.post('/login', user_routes.postlogin);
 
 app.get('/account', pass.ensureAuthenticated, user_routes.account);
+app.post('/account', pass.ensureAuthenticated, user_routes.postAccount);
+
 app.get('/admin', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes.admin);
 
 app.get('/logout', user_routes.logout);

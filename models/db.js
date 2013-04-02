@@ -16,7 +16,9 @@ var ObjectId = mongoose.SchemaTypes.ObjectId;
   init connection
 */
 
-mongoose.connect('mongodb://localhost/xfm'); //todo - change to process.env
+var db_string = process.env.XFM_STRING || 'mongodb://localhost/xfm';
+
+mongoose.connect(db_string); //todo - change to process.env
   
 var db = mongoose.connection; //export this
 

@@ -14,7 +14,8 @@
 
     <div class="tab-content">
       <div class="tab-pane active" id="admin">
-
+        <input type="text" name="name" placeholder="Enter Forum Name">
+        <button class="btn btn-success pull-right" type="submit" id="update">Add Forum</button>
       </div>
       <div class="tab-pane fade in" id="profile">
 

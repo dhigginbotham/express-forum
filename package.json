@@ -1,6 +1,6 @@
 {
   "name": "express-forum",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "node app"
@@ -8,14 +8,11 @@
   "dependencies": {
     "express": "3.0.3",
     "mmm": "0.2.x",
-    "mongoose": "*",
-    "mongoose-auth": "*",
+    "mongoose": "3.6.x",
     "less-middleware": "*",
-    "socket.io": "*",
-    "pwd": "*",
-    "shot": "*",
-    "passport": "*",
-    "passport-local": "*",
-    "bcrypt": "*"
+    "socket.io": "0.9.x",
+    "passport": "0.1.x",
+    "passport-local": "0.1.6",
+    "bcrypt": "0.7.5"
   }
 }
