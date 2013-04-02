@@ -7,7 +7,7 @@ Node.js needed a fun forum app with some new flashy technology. So here's my go 
 - updated libs, JSLint passing mostly now
 - token system is currently using pwd from the one and only tj
 - bit closer to MVC, easier to follow outside in
-- passport.js module built in
+- passport.js module built in (local strategy for now, planning on the big four ['github','facebook','twitter','github<3'])
 
 I'm leaning towards refactoring to fit within [Hapi.js](https://github.com/spumko/hapi/blob/master/docs/Style.md) style guide. It's pretty clean.
 
@@ -26,6 +26,42 @@ This project is now in both [Express.js](https://github.com/dhigginbotham/expres
 - add joi validation to all inputs
 - Views: Create, Edit, View, Profile, Message, Photos/Media
 
+###API Routes
+These are a work in progress, basically drawing board until I make some real definitions
+```
+
+  /account
+    /new
+    /delete
+    /update
+    /view
+
+  /admin
+    /view
+
+  /login
+  /register
+  /logout
+
+  inherit parent form id/slug?
+
+  .../forums
+        /new
+        /delete
+        /update
+        /view
+  .../topics
+        /new
+        /delete
+        /update
+        /view
+  .../messages
+        /new
+        /delete
+        /update
+        /view
+
+```
 ###Version
 0.0.9
 
