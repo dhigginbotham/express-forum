@@ -3,24 +3,27 @@
   define modules
 */
 
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
+  , bcrypt = require('bcrypt')
+  , SALT_WORK_FACTOR = 10;
+
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.SchemaTypes.ObjectId;
+
+
 
 /*
   init connection
 */
 
 mongoose.connect('mongodb://localhost/xfm'); //todo - change to process.env
+  
+var db = mongoose.connection;
 
-/*
-  validatePresenceOf
-  useage: validate: [validatePresenceOf, ' is required'
-*/
-
-function validatePresenceOf(value) {
-  return value && value.length;
-}
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback() {
+  console.log('Connected to DB');
+});
 
 /*
   define UserSchema
@@ -29,7 +32,8 @@ function validatePresenceOf(value) {
 var UserSchema = new Schema({
   id: { type: ObjectId, index: true },
   username: { type: String, required: true, unique: true },
-  salt: { type: String, required: true },
+  // salt: { type: String, required: true },
+  accessToken: { type: String },
   first_name: { type: String },
   last_name: String,
   email: { type: String, required: true, unique: true },
@@ -37,6 +41,43 @@ var UserSchema = new Schema({
   created: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now }
 });
+
+// Bcrypt middleware
+UserSchema.pre('save', function(next) {
+  var user = this;
+
+  if(!user.isModified('password')) return next();
+
+  bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+    if(err) return next(err);
+
+    bcrypt.hash(user.password, salt, function(err, hash) {
+      if(err) return next(err);
+      user.password = hash;
+      next();
+    });
+  });
+});
+
+// Password verification
+UserSchema.methods.comparePassword = function(candidatePassword, cb) {
+  bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+    if(err) return cb(err);
+    cb(null, isMatch);
+  });
+};
+
+// Remember Me implementation helper method
+UserSchema.methods.generateRandomToken = function () {
+  var user = this,
+      chars = "_!abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+      token = new Date().getTime() + '_';
+  for ( var x = 0; x < 16; x++ ) {
+    var i = Math.floor( Math.random() * 62 );
+    token += chars.charAt( i );
+  }
+  return token;
+};
 
 /*
   define ForumSchema
@@ -85,7 +126,17 @@ var MessageSchema = new Schema({
   export the model so it can play nice with others ;)
 */
 
-exports.User = mongoose.model('User', UserSchema);
-exports.Forum = mongoose.model('Forum', ForumSchema);
-exports.Topic = mongoose.model('Topic', TopicSchema);
-exports.Message = mongoose.model('Message', MessageSchema);
+var User = exports.User = mongoose.model('User', UserSchema);
+var Forum = exports.Forum = mongoose.model('Forum', ForumSchema);
+var Topic = exports.Topic = mongoose.model('Topic', TopicSchema);
+var Message = exports.Message = mongoose.model('Message', MessageSchema);
+
+// var usr = new User({ username: 'dhz', email: 'david@hillsoft.com', password: 'secret' });
+// usr.save(function(err) {
+//   if(err) {
+//     console.log(err);
+//   } else {
+//     console.log('user: ' + usr.username + " saved.");
+//   }
+// });
+

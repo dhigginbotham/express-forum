@@ -87,12 +87,7 @@ exports.register = function (req, res) {
         }
       });
       //start socket.io
-  /*      io.sockets.on('connection', function (socket) {
 
-          socket.on('register', function (data) {
-            console.log(data);
-          });
-        });*/
       //end socket.io
     });
   });
@@ -122,12 +117,7 @@ exports.login = function (req, res) {
         }
       });
       //start socket.io
-  /*      io.sockets.on('connection', function (socket) {
 
-          socket.on('login', function (data) {
-            console.log(data);
-          });
-        });*/
       //end socket.io
     });
   });

@@ -20,7 +20,7 @@ exports.index = function (req, res) {
     que.embed(req, function (queued) {
 
       res.render('pages/index', {
-        title: 'Node Forum',
+        title: 'Welcome ',
         que: {
           head: queued.head,
           foot: queued.foot
