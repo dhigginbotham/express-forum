@@ -48,6 +48,6 @@ forms.msg = [
 
 forms.login = [
   {name: 'username', type: 'text', std: 'Login', ctx: null, desc: 'Suggested to use same name as forum.', db: 'username'},
-  {name: 'password', type: 'text', std: 'Password', ctx: null, desc: 'Strongly suggested not to use the same password as the forum!', db: 'password'},
+  {name: 'password', type: 'password', std: 'Password', ctx: null, desc: 'Strongly suggested not to use the same password as the forum!', db: 'password'},
   {name: 'title', type: 'string', std: 'Login Box'}
 ];

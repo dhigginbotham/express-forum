@@ -33,7 +33,7 @@ var UserSchema = new Schema({
   id: { type: ObjectId, index: true },
   username: { type: String, required: true, unique: true },
   password: { type: String, require: true },
-  admin: { type: Boolean, required: true },
+  admin: { type: Boolean, required: true, default: false },
   firstName: String,
   lastName: String,
   email: { type: String, required: true, unique: true },
@@ -132,7 +132,7 @@ var Forum = exports.Forum = mongoose.model('Forum', ForumSchema);
 var Topic = exports.Topic = mongoose.model('Topic', TopicSchema);
 var Message = exports.Message = mongoose.model('Message', MessageSchema);
 
-var usr = new User({ username: 'dhz3', email: 'david@hillsoft.com3', password: 'secret2', admin: true });
+var usr = new User({ username: 'dhz2', email: 'david@hillsoft.com', password: 'secret', admin: true });
 usr.save(function(err) {
   if(err) {
     console.log(err);
