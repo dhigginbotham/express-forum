@@ -7,10 +7,10 @@ var mongoose = require('mongoose')
   , bcrypt = require('bcrypt')
   , SALT_WORK_FACTOR = 10;
 
+exports.mongoose = mongoose; 
+
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.SchemaTypes.ObjectId;
-
-
 
 /*
   init connection
@@ -32,18 +32,19 @@ db.once('open', function callback() {
 var UserSchema = new Schema({
   id: { type: ObjectId, index: true },
   username: { type: String, required: true, unique: true },
-  // salt: { type: String, required: true },
-  accessToken: { type: String },
-  first_name: { type: String },
-  last_name: String,
+  password: { type: String, require: true },
+  admin: { type: Boolean, required: true },
+  firstName: String,
+  lastName: String,
   email: { type: String, required: true, unique: true },
   logcount: Number,
-  created: { type: Date, default: Date.now },
-  updated: { type: Date, default: Date.now }
+  createdOn: { type: Date, default: Date.now },
+  updatedOn: { type: Date, default: Date.now }
 });
 
 // Bcrypt middleware
 UserSchema.pre('save', function(next) {
+
   var user = this;
 
   if(!user.isModified('password')) return next();
@@ -131,12 +132,12 @@ var Forum = exports.Forum = mongoose.model('Forum', ForumSchema);
 var Topic = exports.Topic = mongoose.model('Topic', TopicSchema);
 var Message = exports.Message = mongoose.model('Message', MessageSchema);
 
-// var usr = new User({ username: 'dhz', email: 'david@hillsoft.com', password: 'secret' });
-// usr.save(function(err) {
-//   if(err) {
-//     console.log(err);
-//   } else {
-//     console.log('user: ' + usr.username + " saved.");
-//   }
-// });
+var usr = new User({ username: 'dhz3', email: 'david@hillsoft.com3', password: 'secret2', admin: true });
+usr.save(function(err) {
+  if(err) {
+    console.log(err);
+  } else {
+    console.log('user: ' + usr.username + " saved.");
+  }
+});
 

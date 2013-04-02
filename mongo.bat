@@ -1,7 +1,7 @@
 @echo off
 
-set MONGODB=E:\Mongo\bin\mongod.exe
-set DB_PATH=E:\Mongo\db
+set MONGODB=D:\Mongo\bin\mongod.exe
+set DB_PATH=D:\Mongo\data\db
 
 echo Starting MongoDB ...
 start %MONGODB% --dbpath %DB_PATH% --verbose
