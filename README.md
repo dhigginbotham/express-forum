@@ -68,7 +68,7 @@ These are a work in progress, basically drawing board until I make some real def
   /logout
 ```
 ###Version
-0.0.9
+0.1.7
 
 ###License
 (The MIT License)

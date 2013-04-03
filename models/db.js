@@ -39,6 +39,7 @@ var UserSchema = new Schema({
   first_name: String,
   last_name: String,
   email: { type: String, required: true, unique: true },
+  ip: { type: String, required: true },
   logcount: Number,
   createdOn: { type: Date, default: Date.now },
   updatedOn: { type: Date, default: Date.now }
@@ -89,11 +90,34 @@ UserSchema.methods.generateRandomToken = function () {
 var ForumSchema = new Schema({
   id: { type: ObjectId, index: true }, //++i
   name: { type: String, required: true }, //string 50
+  parent: { type: ObjectId }, //string 50
   slug: String, //string 50
   desc: String, //string 255
   updated: { type: Date, default: Date.now }, //datetime
+  ip: { type: String, required: true },
   created: { type: Date, default: Date.now } //datetime
 });
+
+ForumSchema.pre('save', function (next) {
+  var forum = this;
+
+  if(!forum.isModified('name')) {
+    return next();
+  } else {
+    forum.slug = makeSlug(forum.name);
+    return next();
+  }
+});
+
+var makeSlug = function (value) {
+// Generates a URL-friendly "slug" from a provided string.
+// For example: "This Is Great!!!" transforms into "this-is-great"
+  // 1) convert to lowercase
+  // 2) remove dashes and pluses
+  // 3) replace spaces with dashes
+  // 4) remove everything but alphanumeric characters and dashes
+  return value.toLowerCase().replace(/-+/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+};
 
 /*
   define TopicSchema
@@ -108,6 +132,7 @@ var TopicSchema = new Schema({
   created: { type: Date, default: Date.now }, //datetime
   updated: { type: Date, default: Date.now }, //datetime
   count: Number, //int
+  ip: { type: String, required: true },
   parent: { type: ObjectId }, //int
   message: { type: String, required: true } //text
 });
@@ -142,3 +167,12 @@ var Message = exports.Message = mongoose.model('Message', MessageSchema);
 //     console.log('user: ' + usr.username + " saved.");
 //   }
 // });
+
+var forer = new Forum({name: 'some random name with slug fun', ip: '127.0.0.1'});
+forer.save(function(err) {
+  if(err) {
+    console.log(err);
+  } else {
+    console.log('forum: ' + forer.name + " saved.");
+  }
+});

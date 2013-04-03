@@ -43,26 +43,28 @@ app.configure('development', function () {
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
-//add in passport routes
-
 app.get('/', controllers.index);
 
-// User pages
+app.get('/a', pass.ensureAuthenticated, user_routes.get.modify);
+app.post('/a/update', pass.ensureAuthenticated, user_routes.post.modify);
 
-app.get('/login', user_routes.getlogin);
-app.post('/login', user_routes.postlogin);
-
-app.get('/account', pass.ensureAuthenticated, user_routes.account);
-app.post('/account', pass.ensureAuthenticated, user_routes.postAccount);
+app.get('/a/view/all', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes.get.view);
 
 app.get('/f/create', pass.ensureAuthenticated, crud_routes.get.create);
 app.post('/f/create', pass.ensureAuthenticated, crud_routes.post.create);
 
-app.get('/admin', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes.admin);
+app.get('/f/view', pass.ensureAuthenticated, pass.ensureAdmin(), crud_routes.get.view);
+
+app.get('/f/update', pass.ensureAuthenticated, pass.ensureAdmin(), crud_routes.get.modify);
+app.post('/f/update', pass.ensureAuthenticated, pass.ensureAdmin(), crud_routes.post.modify);
+
+app.get('/make-admin', pass.ensureAuthenticated, user_routes.get.makeAdmin); //remove this asap
 
 app.get('/logout', user_routes.logout);
 
-//user routes
+app.get('/login', user_routes.getlogin);
+app.post('/login', user_routes.postlogin);
+
 app.get('/register', user_routes.register);
 app.post('/register', user_routes.add);
 

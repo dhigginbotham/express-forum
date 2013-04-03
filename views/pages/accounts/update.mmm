@@ -15,7 +15,7 @@
 
     <div class="tab-content">
       <div class="tab-pane fade in active" id="settings">
-        <form id="login-form" method="post" action="/account">
+        <form id="login-form" method="{{form.method}}" action="{{form.uri}}">
           {{#flash}}
             <div class="alert">
               <button type="button" class="close" data-dismiss="alert">&times;</button>

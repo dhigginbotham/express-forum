@@ -1,45 +1,17 @@
 //controllers/crud.js
-
-/*
-  add additional middleware
-*/
 var que = require('../lib/que');
 var navi = require('../lib/navi');
 
+var Scripts = require('../models/scripts');
+
+//socket.io fun
 var io = require('../conf/server').io;
+
+//get db model
 var Forum = require('../models/db').Forum;
 
 exports.post = {};
 exports.get = {};
-
-exports.get.create = function (req, res) {
-
-  /**
-  Route: :f/create
-  Method: Post
-  */
-
-  //render js & css
-  navi.gator(req, function (gator) {
-
-    que.embed(req, function (queued) {
-
-      res.render('pages/create', {
-        title: 'Welcome ',
-        que: {
-          head: queued.head,
-          foot: queued.foot
-        },
-        nav: gator,
-        user: req.user
-      });
-    });
-  });
-  // io.sockets.on('connection', function (socket) {
-  //   socket.on('create_forum', function (data) {
-  //   });
-  // });
-};
 
 /**
 var ForumSchema = new Schema({
@@ -52,9 +24,44 @@ var ForumSchema = new Schema({
 });
 */
 
+exports.get.create = function (req, res) {
+
+  /**
+  Route: :f/create
+  Method: Get
+  */
+
+  //render js & css
+  navi.gator(req, function (gator) {
+
+    que.embed(req, function (queued) {
+
+      res.render('pages/forums/add', {
+        title: 'Welcome ',
+        que: {
+          head: queued.head,
+          foot: queued.foot
+        },
+        nav: gator,
+        form: {uri: '/f/update', method: 'POST'},
+
+        user: req.user
+      });
+    });
+  });
+};
+
+
 exports.post.create = function (req, res) {
+
+  /**
+  Route: :f/create
+  Method: Post
+  */
+
   var forum = new Forum({
     name: req.body.forum_name,
+    ip: req.ip,
     desc: req.body.forum_desc
   });
 
@@ -66,4 +73,73 @@ exports.post.create = function (req, res) {
       return res.redirect('/f/create#success');
     }
   });
+};
+
+exports.get.view = function (req, res) {
+
+  /**
+  Route: :f/view
+  Method: Get
+  */
+  
+  Forum.find({}, function(err, docs) {
+    if (!err) {
+      res.send(docs);
+    } else {
+      req.session.messages = 'something bad happened';
+    }
+  });
+};
+
+exports.post.modify = function (req, res) {
+
+  /**
+  Route: :f/view
+  Method: Get
+  */
+
+  var forum = {
+    name: req.body.forum_name,
+    ip: req.ip,
+    desc: req.body.forum_desc,
+    parent: req.body.forum_parent,
+    updated: new Date()
+  };
+
+  Forum.update({ username: req.user.username }, forum, {safe: true}, function (err) {
+    if (!err) {
+      return res.redirect('/f/update');
+    } else {
+      req.session.messages = 'error updating form' + req.body.forum_name;
+      return res.redirect('/f/update#error');
+    }
+  });
+};
+
+exports.get.modify = function (req, res) {
+  
+  var scripts = Scripts.files;
+  //render our form from the model
+    //render js & css
+    navi.gator(req, function (gator) {
+
+      que.embed(req, function (queued) {
+
+        res.render('pages/forums/edit', {
+          title: 'Welcome ',
+          dest: 'forum',
+          form: {uri: '/f/update', method: 'POST'},
+          que: {
+            head: queued.head,
+            foot: queued.foot
+          },
+          nav: gator,
+          user: req.user,
+          flash: req.session.messages
+        });
+      //start socket.io
+
+      //end socket.io        
+      });
+    });
 };

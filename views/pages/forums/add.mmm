@@ -1,0 +1,36 @@
+{{> parts/navi}}
+
+<div class="row">
+  <div class="span3">
+    <h2>{{user.username}}</h2>
+    <p>Email: {{user.email}}</p>
+    <p>Admin: {{user.admin}}</p>
+  </div>
+  <div class="span9">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
+      <li><a href="#profile" data-toggle="tab">Profile</a></li>
+      <li><a href="#messages" data-toggle="tab">Messages</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane fade in active" id="settings">
+      
+        {{#flash}}
+          <div class="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{flash}}
+          </div>
+        {{/flash}}
+
+      </div>
+      <div class="tab-pane fade in" id="profile">
+
+      </div>
+      <div class="tab-pane fade in" id="messages">
+
+      </div>
+    </div>
+  </div>
+</div>
+

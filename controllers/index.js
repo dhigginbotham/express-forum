@@ -4,13 +4,11 @@
 var que = require('../lib/que');
 var navi = require('../lib/navi');
 
-
 var Scripts = require('../models/scripts');
-/*
- * GET home page.
- */
 
+//render home page
 exports.index = function (req, res) {
+
   var scripts = Scripts.files;
   //render js & css
   navi.gator(req, function (gator) {

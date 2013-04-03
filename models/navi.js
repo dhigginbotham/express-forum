@@ -3,7 +3,7 @@ var navi = module.exports = {};
 
 navi.auth = [
   {std : null, id : 'welcome', icon : 'home', cur : null, href : '/', token : null},
-  {std : 'Account', id : 'account', icon : null, cur : null, href : '/account', token : null},
+  {std : 'Account', id : 'account', icon : null, cur : null, href : '/a', token : null},
   {std : 'Logout', id : 'logout', icon : null, cur : null, href : '/logout', token : null},
   {std : 'Admin', id : 'admin', icon : null, cur : null, href : '/f/create', token : null}
 ];
