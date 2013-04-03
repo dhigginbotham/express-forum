@@ -36,7 +36,6 @@ var makeSlug = function (value) {
   // 4) remove everything but alphanumeric characters and dashes
   return value.toLowerCase().replace(/-+/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 };
-
 /*
   define UserSchema
 */

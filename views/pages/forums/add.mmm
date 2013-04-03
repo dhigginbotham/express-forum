@@ -10,12 +10,21 @@
     <form action="{{form.uri}}" method="{{form.method}}" id="create">
       <fieldset>
         <div class="control-group">
-          <label for="forum_name" class="control-label">Name</label>
-          <input name="forum_name" id="forum_name" style="width: 95%" type="text" />
+          <label for="forum_name" class="control-label">Forum Title</label>
+          <input name="forum_name" id="forum_name" class="input input-block input-block-level" type="text" />
         </div>
         <div class="control-group">
           <label for="forum_desc" class="control-label">Contents</label>
-          <textarea name="forum_desc" id="forum_desc" style="width: 100%" rows="30"></textarea>
+          <textarea name="forum_desc" id="forum_desc" style="width: 100%" rows="10"></textarea>
+        </div>
+        <div class="control-group">
+          <label for="forum_parent" class="control-label">Contents</label>
+          <select name="forum_parent" id="forum_parent">
+              <option value="none">-- Select Forum Parent --</option>
+            {{#parents}}
+              <option value="{{_id}}">{{name}}</option>
+            {{/parents}}
+          </select>
         </div>
         <div class="form-actions">
           <input type="submit" value="Save" class="btn btn-large btn-primary" id="submit" />

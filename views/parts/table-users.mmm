@@ -7,19 +7,19 @@
     </colgroup>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Slug</th>
-        <th>Parent</th>
+        <th>Username</th>
+        <th>Admin</th>
+        <th>First Name</th>
+        <th>Last Name</th>
       </tr>
     </thead>
     <tbody>
     {{#docs}}
       <tr>
-        {{#name}}<td>{{name}}</td>{{/name}}
-        <td>{{{desc}}}</td>
-        <td>{{slug}}</td>
-        <td>{{parent}}</td>
+        <td>{{{username}}}</td>
+        <td>{{{admin}}}</td>
+        <td>{{first_name}}</td>
+        <td>{{last_name}}</td>
       </tr>
     {{/docs}}
     </tbody>

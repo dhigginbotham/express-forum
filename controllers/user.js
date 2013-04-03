@@ -116,23 +116,46 @@ exports.register = function (req, res) {
 // };
 
 exports.get.view = function (req, res) {
-
   /**
-  Route: :a/view
+  Route: :f/view
   Method: Get
   */
-  
-  User.find({}, function(err, docs) {
-    if (!err) {
-      res.send(docs);
-    } else {
-      req.session.messages = 'something bad happened';
-    }
-  });
+    User.find({}, function(err, docs) {
+      if (req.query.json) {
+        if (!err) {
+          res.send(docs);
+        } else {
+          req.session.messages = 'something bad happened';
+        }
+      } else {
+        return templateView(req, res, docs);
+      }
+    });
 };
 
+var templateView = exports.get.templateView = function (req, res, docs) {
+  var scripts = Scripts.files;
+  //render js & css
+  navi.gator(req, function (gator) {
+
+    que.embed(req, function (queued) {
+
+      res.render('pages/accounts/users', {
+        title: 'Welcome ',
+        que: {
+          head: queued.head,
+          foot: queued.foot
+        },
+        nav: gator,
+        user: req.user,
+        docs: docs
+      });
+    });
+  });
+}
+
 exports.getlogin = function(req, res) {
-  
+
   //get shorter reference of register form model
   var login = Forms.login;
   var scripts = Scripts.files;

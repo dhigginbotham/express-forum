@@ -30,23 +30,33 @@ exports.get.create = function (req, res) {
   Route: :f/create
   Method: Get
   */
+  
 
-  //render js & css
-  navi.gator(req, function (gator) {
+  Forum.find({}, function(err, docs) {
+    if (!err) {
+      var forums = docs;
+      console.log(forums);
+    } else {
+      var forums = null;
+    }
 
-    que.embed(req, function (queued) {
+    //render js & css
+    navi.gator(req, function (gator) {
 
-      res.render('pages/forums/add', {
-        title: 'Welcome ',
-        que: {
-          head: queued.head,
-          foot: queued.foot
-        },
-        nav: gator,
-        form: {uri: '/f/create', method: 'POST'},
+      que.embed(req, function (queued) {
 
-        user: req.user,
-        flash: req.session.messages
+        res.render('pages/forums/add', {
+          title: 'Welcome ',
+          que: {
+            head: queued.head,
+            foot: queued.foot
+          },
+          nav: gator,
+          form: {uri: '/f/create', method: 'POST'},
+          parents: forums,
+          user: req.user,
+          flash: req.session.messages
+        });
       });
     });
   });
@@ -59,10 +69,15 @@ exports.post.create = function (req, res) {
   Method: Post
   */
 
+  if (req.body.forum_parent === 'none') {
+    req.body.forum_parent = null;
+  }
+
   var forum = new Forum({
     name: req.body.forum_name,
     ip: req.ip,
-    desc: req.body.forum_desc
+    desc: req.body.forum_desc,
+    parent: req.body.forum_parent
   });
 
   forum.save(function (err) {
