@@ -2,11 +2,7 @@
 
 <div class="row">
   <div class="span3">
-    <img src="http://www.gravatar.com/avatar/{{hash}}?s=250&r=pg&d=404" alt="Gravatar Image" class="thumbnail" />
-    <h2>{{user.username}}</h2>
-    {{#user.first_name}}<p>{{user.first_name}} {{user.last_name}}{{/user.first_name}}</p>
-    <p>Location: {{user.location}}</p>
-    <p>Admin: {{user.admin}}</p>
+  {{>parts/sidebar}}
   </div>
   <div class="span9">
     <ul class="nav nav-tabs">

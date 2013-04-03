@@ -4,7 +4,7 @@
     <div class="nav-collapse collapse">
       <ul class="nav pull-right">
         {{#nav}}
-          <li{{#cur?}} class="{{cur}}"{{/cur?}}>
+          <li{{#cur}} class="{{cur}}"{{/cur}}>
             <a href="{{href}}" id="navigation-{{id}}">{{#icon}}<i class="icon-{{icon}}"></i> {{/icon}}{{std}}</a>
           </li>
         {{/nav}}

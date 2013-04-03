@@ -30,12 +30,10 @@ exports.get.create = function (req, res) {
   Route: :f/create
   Method: Get
   */
-  
 
   Forum.find({}, function(err, docs) {
     if (!err) {
       var forums = docs;
-      console.log(forums);
     } else {
       var forums = null;
     }

@@ -1,0 +1,13 @@
+{{>parts/navi}}
+
+<div class="row">
+  <div class="span3">
+  {{>parts/sidebar}}
+  </div>
+  <div class="span9">
+    <div class="well">
+      <h2>{{user.username}}'s profile</h2>
+      <p class="lead">Currently not active in any forums</p>
+    </div>
+  </div>
+</div>

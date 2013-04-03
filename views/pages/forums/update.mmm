@@ -2,9 +2,7 @@
 
 <div class="row">
   <div class="span3">
-    <h2>{{user.username}}</h2>
-    <p>Email: {{user.email}}</p>
-    <p>Admin: {{user.admin}}</p>
+  {{>parts/sidebar}}
   </div>
   <div class="span9">
     <ul class="nav nav-tabs">

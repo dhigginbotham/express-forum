@@ -17,10 +17,11 @@
     {{#docs}}
       <tr>
         <td>{{name}}</td>
-        <td>{{desc}}</td>
+        <td>{{{desc}}}</td>
         <td>{{slug}}</td>
         <td>{{parent}}</td>
       </tr>
     {{/docs}}
     </tbody>
   </table>
+  <a href="/f/view?json=true" class="btn btn-primary btn-small">Switch to JSON View</a>

@@ -124,6 +124,50 @@ var templateView = exports.get.templateView = function (req, res, docs) {
   });
 }
 
+exports.get.viewUser = function (req, res) {
+  /**
+  Route: :f/view
+  Method: Get
+  */
+  var uname = req.path.user;
+
+  User.find({username: uname}, function(err, docs) {
+    if (req.query.json) {
+      if (!err) {
+        res.send(docs);
+      } else {
+        req.session.messages = 'something bad happened';
+      }
+    } else {
+      return templateViewUser(req, res, docs);
+    }
+  });
+};
+
+var templateViewUser = exports.get.templateViewUser = function (req, res, docs) {
+  var email = req.user.email;
+  var hash = crypto.createHash('md5').update(email).digest("hex");
+
+  var scripts = Scripts.files;
+  //render js & css
+  navi.gator(req, function (gator) {
+
+    que.embed(req, function (queued) {
+
+      res.render('pages/accounts/view', {
+        title: 'xfm-beta ',
+        que: {
+          head: queued.head,
+          foot: queued.foot
+        },
+        nav: gator,
+        user: req.user,
+        docs: docs,
+        hash: hash
+      });
+    });
+  });
+}
 exports.getlogin = function(req, res) {
 
   //get shorter reference of register form model
