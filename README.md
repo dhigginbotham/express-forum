@@ -1,36 +1,19 @@
-###node-forum / express-forum
-Node.js needed a fun forum app with some new flashy technology. So here's my go at making a forum that takes advantage of Node.js w/ [Hapi.js](https://github.com/spumko/hapi) as well as Express.js frameworks, [Socket.IO](http://socket.io/) and uses [Bootstrap](http://twitter.github.com/bootstrap/) for it's UI. *I've got awhile to go*, but if you're interested in contributing shoot me a pull request. Fundamentals, and coding practices you will see in this project will be a little mix of a couple different Styles, however I do tend to be fairly consistant and I will work on documenting this project much better.
-
-###Express Forum Differences
-
-- the express build is currently using mongoose instead of mongoskin
-- updated libs, JSLint passing mostly now (of course not all of it, there's a lot of hybrid syntax and reserved names that will always make her upset...)
-- bit closer to MVC (don't hold me to this... my brain machine feels like i need more folders)
-- passport.js module built in (local strategy for now, planning on the big four ['github','facebook','twitter','github<3'])
-
-I'm leaning towards refactoring to fit within [Hapi.js](https://github.com/spumko/hapi/blob/master/docs/Style.md) style guide. It's pretty clean.
-
-###Updates
-This project is now in both [Express.js](https://github.com/dhigginbotham/express-forum) and [Hapi.js](https://github.com/dhigginbotham/node-forum) frameworks. I felt it was easy enough to keep them in fair parody.
-
-4/2/2013 - Parody `failed` for now, I have to do some research on a couple of Hapi.js plugins and of course refactor some more Express.js code to hapi.js
+### express-forum
+Here's a node.js forum in the making. Socket.IO, Bootstrap UI and Express.js -- sounds about right for a forum these days. Uses passport, currently only supports local strategy, but I plan on adding the big four in soon.
 
 ###Todos
-
-- socket.io pattern for updates like [Hapi.js - Shot](https://github.com/spumko/shot)
 - crud api methods and routes
 - scope issue, might sleep on it 
-- closure pattern on for loops to fix async scope
-- OAuth strategies with passport/travelogue
-- refactor yar & lout to closure pattern
-- test all for loops for incorrect field data
-- add joi validation to all inputs
+- test all for loops for non async usage
+- design better template structure than current mess
+- integrate [socket.io chat](https://github.com/dhigginbotham/rwi-chat)
 - Views: Create, Edit, View, Profile, Message, Photos/Media
+- map app module for prefix crud routes
 
 ###API Routes
-These are a work in progress, basically drawing board until I make some real definitions
+These are a work in progress, basically drawing board until I make some real definitions:
 ```
-  /a || /u
+  /a || /u || /f ??
     /new
     /delete
     /update
@@ -67,8 +50,11 @@ These are a work in progress, basically drawing board until I make some real def
   /register
   /logout
 ```
+
 ###Version
-0.1.7
+0.2
+
+If you'd like to contribute to this project just shoot me a pull request.
 
 ###License
 (The MIT License)
