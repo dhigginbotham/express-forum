@@ -51,7 +51,14 @@ var UserSchema = new Schema({
   ip: { type: String, required: true },
   logcount: Number,
   createdOn: { type: Date, default: Date.now },
-  updatedOn: { type: Date, default: Date.now }
+  updatedOn: { type: Date, default: Date.now },
+  settings: {
+    email_alerts: { type: Boolean, default: false },
+    save_password: { type: Boolean, default: false },
+    usernames: { type: Array, unique: true }
+  },
+  signature: String,
+  location: String
 });
 
 // Bcrypt middleware

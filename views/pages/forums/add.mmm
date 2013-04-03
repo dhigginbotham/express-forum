@@ -10,15 +10,15 @@
     <form action="{{form.uri}}" method="{{form.method}}" id="create">
       <fieldset>
         <div class="control-group">
-          <label for="forum_name" class="control-label">Forum Title</label>
+          <label for="forum_name" class="control-label">Forum Title: </label>
           <input name="forum_name" id="forum_name" class="input input-block input-block-level" type="text" />
         </div>
         <div class="control-group">
-          <label for="forum_desc" class="control-label">Contents</label>
+          <label for="forum_desc" class="control-label">Short Description: </label>
           <textarea name="forum_desc" id="forum_desc" style="width: 100%" rows="10"></textarea>
         </div>
         <div class="control-group">
-          <label for="forum_parent" class="control-label">Contents</label>
+          <label for="forum_parent" class="control-label">Forum Parent: </label>
           <select name="forum_parent" id="forum_parent">
               <option value="none">-- Select Forum Parent --</option>
             {{#parents}}

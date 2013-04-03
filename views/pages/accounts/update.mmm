@@ -2,45 +2,62 @@
 
 <div class="row">
   <div class="span3">
+    <img src="http://www.gravatar.com/avatar/{{hash}}?s=250&r=pg&d=404" alt="Gravatar Image" class="thumbnail" />
     <h2>{{user.username}}</h2>
-    <p>Email: {{user.email}}</p>
+    {{#user.first_name}}<p>{{user.first_name}} {{user.last_name}}{{/user.first_name}}</p>
+    <p>Location: {{user.location}}</p>
     <p>Admin: {{user.admin}}</p>
   </div>
   <div class="span9">
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
-      <li><a href="#profile" data-toggle="tab">Profile</a></li>
+      <li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>
       <li><a href="#messages" data-toggle="tab">Messages</a></li>
     </ul>
 
     <div class="tab-content">
-      <div class="tab-pane fade in active" id="settings">
-        <form id="login-form" method="{{form.method}}" action="{{form.uri}}">
+      <div class="tab-pane fade in active" id="profile">
+        <form method="{{form.method}}" action="{{form.uri}}">
           {{#flash}}
             <div class="alert">
               <button type="button" class="close" data-dismiss="alert">&times;</button>
               {{flash}}
             </div>
           {{/flash}}
-
-          {{#user}}
-            <label for="first_name">First Name: </label>
-            <input type="text" class="input input-block-level" name="first_name" {{#first_name}}value="{{first_name}}"{{/first_name}} />
-            <label for="last_name">Last Name: </label>
-            <input type="text" class="input input-block-level" name="last_name" {{#last_name}}value="{{last_name}}"{{/last_name}} />
-          {{/user}}
-
-          <button class="btn btn-success pull-right" type="submit" id="update">Update Account</button>
+          <fieldset>
+            {{#user}}
+              <div class="control-group"> 
+                <label for="first_name">First Name: </label>
+                <input type="text" class="input input-block-level" name="first_name" {{#first_name}}value="{{first_name}}"{{/first_name}} />
+              </div><div class="control-group">
+                <label for="last_name">Last Name: </label>
+                <input type="text" class="input input-block-level" name="last_name" {{#last_name}}value="{{last_name}}"{{/last_name}} />
+              </div><div class="control-group">
+                <label for="email">Email: </label>
+                <input type="text" class="input input-block-level" name="email" {{#email}}value="{{email}}"{{/email}} />
+              </div><div class="control-group">
+                <label for="location">Location: </label>
+                <input type="text" class="input input-block-level" name="location" {{#location}}value="{{location}}"{{/location}} />
+              </div>
+              <hr />
+              <div class="control-group">
+                <label for="signature">Signature: </label>
+                <textarea name="signature" class="input input-block-level" id="signature" rows="10">{{signature}}</textarea>
+              </div>
+            {{/user}}
+          </fieldset>
+          <div class="form-actions">
+            <input type="submit" value="Save" class="btn btn-large btn-primary" id="submit" />
+            <a href="/logout" class="btn btn-large">Logout</a>
+          </div>
         </form>
       </div>
-      <div class="tab-pane fade in" id="profile">
-        <div class="well">
-          <a href="/logout" class="btn btn-large">Logout</a>
-        </div>
-      </div>
+
       <div class="tab-pane fade in" id="messages">
 
+          {{! messages soon }}
+
       </div>
+
     </div>
   </div>
 </div>

@@ -16,7 +16,7 @@ exports.index = function (req, res) {
     que.embed(req, function (queued) {
 
       res.render('pages/index', {
-        title: 'Welcome ',
+        title: 'xfm-beta ',
         que: {
           head: queued.head,
           foot: queued.foot

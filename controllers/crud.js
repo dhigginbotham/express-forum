@@ -46,7 +46,7 @@ exports.get.create = function (req, res) {
       que.embed(req, function (queued) {
 
         res.render('pages/forums/add', {
-          title: 'Welcome ',
+          title: 'xfm-beta ',
           que: {
             head: queued.head,
             foot: queued.foot
@@ -117,7 +117,7 @@ var templateView = exports.get.templateView = function (req, res, docs) {
     que.embed(req, function (queued) {
 
       res.render('pages/forums/view', {
-        title: 'Welcome ',
+        title: 'xfm-beta ',
         que: {
           head: queued.head,
           foot: queued.foot
@@ -165,7 +165,7 @@ exports.get.modify = function (req, res) {
       que.embed(req, function (queued) {
 
         res.render('pages/forums/update', {
-          title: 'Welcome ',
+          title: 'xfm-beta ',
           dest: 'forum',
           form: {uri: '/f/update', method: 'POST'},
           que: {

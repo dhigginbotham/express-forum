@@ -1,2 +1,6 @@
 {{> parts/navi}}
 
+<div class="hero-unit">
+  <h2>Welcome to this nameless place <small>Chatbox will go here, yes...</small></h2>
+  {{^user.username}}<a href="/login" class="btn btn btn-warning btn-large"><i class="icon-share-alt"></i> Login</a>{{/user.username}}
+</div>

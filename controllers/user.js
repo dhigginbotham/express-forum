@@ -4,6 +4,7 @@
 */
 
 var passport = require('passport');
+var crypto = require('crypto');
 
 var User = require('../models/db').User;
 var Forms = require('../models/forms');
@@ -69,7 +70,7 @@ exports.register = function (req, res) {
     //load js & css
     que.embed(req, function (queued) {
       res.render('pages/register', {
-        title: 'Registration Page',
+        title: 'Registration Page ',
         flash: req.session.messages,
         form: f,
         que: {
@@ -83,37 +84,6 @@ exports.register = function (req, res) {
     });
   });
 };
-
-// exports.account = function(req, res) {
-
-//   //get shorter reference of register form model
-//   var settings = Forms.settings;
-//   var scripts = Scripts.files;
-//   //render our form from the model
-//   form.render(settings, function (f) {
-
-//     //render js & css
-//     navi.gator(req, function (gator) {
-
-//       que.embed(req, function (queued) {
-
-//         res.render('pages/account', {
-//           title: 'Welcome ',
-//           que: {
-//             head: queued.head,
-//             foot: queued.foot
-//           },
-//           nav: gator,
-//           user: req.user,
-//           form: {
-//             settings: f
-//           },
-//           flash: req.session.messages
-//         });
-//       });
-//     });
-//   });
-// };
 
 exports.get.view = function (req, res) {
   /**
@@ -141,7 +111,7 @@ var templateView = exports.get.templateView = function (req, res, docs) {
     que.embed(req, function (queued) {
 
       res.render('pages/accounts/users', {
-        title: 'Welcome ',
+        title: 'xfm-beta ',
         que: {
           head: queued.head,
           foot: queued.foot
@@ -179,38 +149,6 @@ exports.getlogin = function(req, res) {
     });
   });
 };
-
-// exports.admin = function(req, res) {
-
-//   var settings = Forms.settings;
-//   var scripts = Scripts.files;
-//   //render our form from the model
-//   form.render(settings, function (f) {
-//     //render js & css
-//     navi.gator(req, function (gator) {
-
-//       que.embed(req, function (queued) {
-
-//         res.render('pages/admin', {
-//           title: 'Welcome ',
-//           que: {
-//             head: queued.head,
-//             foot: queued.foot
-//           },
-//           nav: gator,
-//           user: req.user,
-//           form: {
-//             settings: f
-//           },
-//           flash: req.session.messages
-//         });
-//       //start socket.io
-
-//       //end socket.io        
-//       });
-//     });
-//   });
-// };
 
 exports.postAccount = function (req, res, next) {
 
@@ -296,6 +234,11 @@ exports.post.modify = function (req, res) {
   var user = {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
+    email: req.body.email,
+    location: req.body.location,
+    signature: req.body.signature,
+    location: req.body.location,
+    email: req.body.email,
     ip: req.ip,
     updated: new Date()
   };
@@ -311,7 +254,9 @@ exports.post.modify = function (req, res) {
 };
 
 exports.get.modify = function (req, res) {
-  
+  var email = req.user.email;
+  var hash = crypto.createHash('md5').update(email).digest("hex");
+
   /**
   Route: :a/update
   Method: Get
@@ -324,7 +269,7 @@ exports.get.modify = function (req, res) {
       que.embed(req, function (queued) {
 
         res.render('pages/accounts/update', {
-          title: 'Welcome ',
+          title: 'xfm-beta ',
           dest: 'forum',
           form: {uri: '/a/update', method: 'POST'},
           que: {
@@ -333,6 +278,7 @@ exports.get.modify = function (req, res) {
           },
           nav: gator,
           user: req.user,
+          hash: hash,
           flash: req.session.messages
         });
       //start socket.io

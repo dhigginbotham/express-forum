@@ -17,7 +17,7 @@
     {{#docs}}
       <tr>
         <td>{{{username}}}</td>
-        <td>{{{admin}}}</td>
+        <td>{{admin}}</td>
         <td>{{first_name}}</td>
         <td>{{last_name}}</td>
       </tr>
