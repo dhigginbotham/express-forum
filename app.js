@@ -58,7 +58,7 @@ app.get('/f/view', pass.ensureAuthenticated, pass.ensureAdmin(), crud_routes.get
 app.get('/f/update', pass.ensureAuthenticated, pass.ensureAdmin(), crud_routes.get.modify);
 app.post('/f/update', pass.ensureAuthenticated, pass.ensureAdmin(), crud_routes.post.modify);
 
-app.get('/make-admin', pass.ensureAuthenticated, user_routes.get.makeAdmin); //remove this asap
+// app.get('/make-admin', pass.ensureAuthenticated, user_routes.get.makeAdmin); //remove this asap
 
 app.get('/logout', user_routes.logout);
 

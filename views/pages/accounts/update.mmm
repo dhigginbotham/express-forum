@@ -42,6 +42,14 @@
               <div class="control-group">
                 <label for="signature">Signature: </label>
                 <textarea name="signature" class="input input-block-level" id="signature" rows="10">{{signature}}</textarea>
+              </div><div class="control-group">
+                <label for="email_alerts"><p>I want to receive email updates from the forum:</p>
+                <input type="checkbox" class="input" name="email_alerts_yes" value="true" {{#settings.email_alerts}}checked{{/settings.email_alerts}}/> </label>
+                <label for="email_alerts"><p>Ain't got no time fo' dat!</p>
+                <input type="checkbox" class="input" name="email_alerts_no" value="false" {{^settings.email_alerts}}checked{{/settings.email_alerts}}/> </label>
+              </div><div class="control-group">
+                <label for="save_password">Save Password: 
+                <input type="checkbox" class="input" name="save_password" value="true" {{#settings.save_password}}checked{{/settings.save_password}}/></label>
               </div>
             {{/user}}
           </fieldset>
