@@ -56,6 +56,7 @@ app.get('/account', pass.ensureAuthenticated, user_routes.account);
 app.post('/account', pass.ensureAuthenticated, user_routes.postAccount);
 
 app.get('/f/create', pass.ensureAuthenticated, crud_routes.get.create);
+app.post('/f/create', pass.ensureAuthenticated, crud_routes.post.create);
 
 app.get('/admin', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes.admin);
 

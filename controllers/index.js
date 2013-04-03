@@ -15,7 +15,7 @@ exports.index = function (req, res) {
   //render js & css
   navi.gator(req, function (gator) {
 
-    que.embed(req, scripts, function (queued) {
+    que.embed(req, function (queued) {
 
       res.render('pages/index', {
         title: 'Welcome ',

@@ -62,9 +62,9 @@ var HelperClass = (function() {
         socket.emit(event, data);
       });
     },
-    NicEditor: function() {
+    NicEditor: function(instance) {
       bkLib.onDomLoaded(function() {
-        new nicEditor({buttonList : ['fontSize','bold','italic','underline','strikeThrough','subscript','superscript','html']}).panelInstance('contents');
+        new nicEditor({buttonList : ['fontSize','bold','italic','underline','strikeThrough','subscript','superscript','html']}).panelInstance(instance);
       });
     }
   }

@@ -19,9 +19,10 @@ var io = require('../conf/server').io;
   define shared controllers
 */
 
+var navi = require('../lib/navi');
 var que = require('../lib/que');
 var form = require('../lib/forms');
-var navi = require('../lib/navi');
+
 
 /*
  * POST users listing.
@@ -64,7 +65,7 @@ exports.register = function (req, res) {
   form.render(register, function (f) {
 
     //load js & css
-    que.embed(req, scripts, function (queued) {
+    que.embed(req, function (queued) {
       res.render('pages/register', {
         title: 'Registration Page',
         flash: req.session.messages,
@@ -92,7 +93,7 @@ exports.account = function(req, res) {
     //render js & css
     navi.gator(req, function (gator) {
 
-      que.embed(req, scripts, function (queued) {
+      que.embed(req, function (queued) {
 
         res.render('pages/account', {
           title: 'Welcome ',
@@ -120,7 +121,7 @@ exports.getlogin = function(req, res) {
   form.render(login, function (f) {
 
     //load js & css
-    que.embed(req, scripts, function (queued) {
+    que.embed(req, function (queued) {
       res.render('pages/login', {
         title: 'Registration Page',
         flash: req.session.messages,
@@ -147,7 +148,7 @@ exports.admin = function(req, res) {
     //render js & css
     navi.gator(req, function (gator) {
 
-      que.embed(req, scripts, function (queued) {
+      que.embed(req, function (queued) {
 
         res.render('pages/admin', {
           title: 'Welcome ',

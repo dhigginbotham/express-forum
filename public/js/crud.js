@@ -11,7 +11,7 @@ var CrudClass = (function() {
       init: function() {
         s = this.settings;
         CrudClass.bind();
-        HelperClass.NicEditor();
+        HelperClass.NicEditor('forum_desc');
       },
       bind: function() {
         s.reg.bind('click', function() {

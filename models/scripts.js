@@ -27,4 +27,3 @@ scripts.files = [
   {src : '/js/crud.js', name : 'crud.js', where : 'foot', uri : '/f/create', type : 'js'},
   {src : '//js.nicedit.com/nicEdit-latest.js', name : 'nicEdit-latest.js', where : 'foot', uri : '/f/create', type : 'js'}
 ];
-
