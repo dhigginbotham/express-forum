@@ -6,7 +6,7 @@
   </div>
   <div class="span9">
     <div class="well">
-      <h2>{{user.username}}'s profile</h2>
+      <h2>{{docs.username}}'s profile</h2>
       <p class="lead">Currently not active in any forums</p>
     </div>
   </div>

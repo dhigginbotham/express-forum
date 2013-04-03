@@ -49,7 +49,8 @@ app.get('/a', pass.ensureAuthenticated, user_routes.get.modify);
 app.post('/a/update', pass.ensureAuthenticated, user_routes.post.modify);
 
 app.get('/a/view/all', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes.get.view);
-app.get('/a/view/:user', pass.ensureAuthenticated, user_routes.get.viewUser);
+
+app.get('/a/view/:usr', pass.ensureAuthenticated, user_routes.get.viewUser);
 
 app.get('/f/create', pass.ensureAuthenticated, crud_routes.get.create);
 app.post('/f/create', pass.ensureAuthenticated, crud_routes.post.create);

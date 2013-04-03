@@ -1,5 +1,5 @@
-    {{#hash}}<img src="http://www.gravatar.com/avatar/{{hash}}?s=250&r=pg&d=404" alt="Gravatar Image" class="thumbnail" />{{/hash}}
-    <h2><a href="/a/view/{{user.username}}">{{user.username}}</a></h2>
-    {{#user.first_name}}<p>{{user.first_name}} {{user.last_name}}{{/user.first_name}}</p>
-    <p>Location: {{user.location}}</p>
-    <p>Admin: {{user.admin}}</p>
+{{#hash}}<img src="http://www.gravatar.com/avatar/{{hash}}?s=250&r=pg&d=404" alt="Gravatar Image" class="thumbnail" />{{/hash}}
+<h2><a href="/a/view/{{docs.username}}">{{docs.username}}</a></h2>
+{{#docs.first_name}}<p>{{docs.first_name}} {{docs.last_name}}{{/docs.first_name}}</p>
+<p>Location: {{docs.location}}</p>
+<p>Admin: {{docs.admin}}</p>

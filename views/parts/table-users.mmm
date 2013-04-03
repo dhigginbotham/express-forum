@@ -16,10 +16,10 @@
     <tbody>
     {{#docs}}
       <tr>
-        <td>{{{username}}}</td>
-        <td>{{admin}}</td>
-        <td>{{first_name}}</td>
-        <td>{{last_name}}</td>
+        <td><a href="/a/view/{{username}}">{{username}}</a></td>
+        <td><a href="/a/view/{{username}}">{{admin}}</a></td>
+        <td><a href="/a/view/{{username}}">{{first_name}}</a></td>
+        <td><a href="/a/view/{{username}}">{{last_name}}</a></td>
       </tr>
     {{/docs}}
     </tbody>

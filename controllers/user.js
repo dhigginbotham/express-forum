@@ -98,76 +98,74 @@ exports.get.view = function (req, res) {
           req.session.messages = 'something bad happened';
         }
       } else {
-        return templateView(req, res, docs);
+        var scripts = Scripts.files;
+        //render js & css
+        navi.gator(req, function (gator) {
+
+          que.embed(req, function (queued) {
+
+            res.render('pages/accounts/users', {
+              title: 'xfm-beta ',
+              que: {
+                head: queued.head,
+                foot: queued.foot
+              },
+              nav: gator,
+              user: req.user,
+              docs: docs
+            });
+          });
+        });
       }
     });
 };
-
-var templateView = exports.get.templateView = function (req, res, docs) {
-  var scripts = Scripts.files;
-  //render js & css
-  navi.gator(req, function (gator) {
-
-    que.embed(req, function (queued) {
-
-      res.render('pages/accounts/users', {
-        title: 'xfm-beta ',
-        que: {
-          head: queued.head,
-          foot: queued.foot
-        },
-        nav: gator,
-        user: req.user,
-        docs: docs
-      });
-    });
-  });
-}
 
 exports.get.viewUser = function (req, res) {
   /**
   Route: :f/view
   Method: Get
   */
-  var uname = req.path.user;
 
-  User.find({username: uname}, function(err, docs) {
+  User.find({username: req.route.params.usr}, function(err, docs) {
+    if (err) return err;
+
     if (req.query.json) {
       if (!err) {
-        res.send(docs);
+        res.send(docs[0]);
       } else {
         req.session.messages = 'something bad happened';
       }
     } else {
-      return templateViewUser(req, res, docs);
-    }
+      if(!err) {
+        var email = docs[0].email;
+        var hash = crypto.createHash('md5').update(email).digest("hex");
+
+        var scripts = Scripts.files;
+        //render js & css
+        navi.gator(req, function (gator) {
+
+          que.embed(req, function (queued) {
+
+            res.render('pages/accounts/view', {
+              title: 'xfm-beta ',
+              que: {
+                head: queued.head,
+                foot: queued.foot
+              },
+              nav: gator,
+              user: req.user,
+              docs: docs[0],
+              hash: hash
+            });
+          });
+        });
+      } else {
+        req.session.messages = 'nonono';
+      }
+    };
   });
 };
 
-var templateViewUser = exports.get.templateViewUser = function (req, res, docs) {
-  var email = req.user.email;
-  var hash = crypto.createHash('md5').update(email).digest("hex");
-
-  var scripts = Scripts.files;
-  //render js & css
-  navi.gator(req, function (gator) {
-
-    que.embed(req, function (queued) {
-
-      res.render('pages/accounts/view', {
-        title: 'xfm-beta ',
-        que: {
-          head: queued.head,
-          foot: queued.foot
-        },
-        nav: gator,
-        user: req.user,
-        docs: docs,
-        hash: hash
-      });
-    });
-  });
-}
 exports.getlogin = function(req, res) {
 
   //get shorter reference of register form model
