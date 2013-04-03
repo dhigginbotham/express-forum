@@ -43,9 +43,10 @@ exports.get.create = function (req, res) {
           foot: queued.foot
         },
         nav: gator,
-        form: {uri: '/f/update', method: 'POST'},
+        form: {uri: '/f/create', method: 'POST'},
 
-        user: req.user
+        user: req.user,
+        flash: req.session.messages
       });
     });
   });
@@ -53,7 +54,6 @@ exports.get.create = function (req, res) {
 
 
 exports.post.create = function (req, res) {
-
   /**
   Route: :f/create
   Method: Post
@@ -70,26 +70,50 @@ exports.post.create = function (req, res) {
       req.session.messages = JSON.stringify(err);
       res.redirect('/f/create#error');
     } else {
-      return res.redirect('/f/create#success');
+      req.session.messages = 'awesome you added a forum!';
+      return res.redirect('/f/create');
     }
   });
 };
 
 exports.get.view = function (req, res) {
-
   /**
   Route: :f/view
   Method: Get
   */
-  
-  Forum.find({}, function(err, docs) {
-    if (!err) {
-      res.send(docs);
-    } else {
-      req.session.messages = 'something bad happened';
-    }
-  });
+    Forum.find({}, function(err, docs) {
+      if (req.query.json) {
+        if (!err) {
+          res.send(docs);
+        } else {
+          req.session.messages = 'something bad happened';
+        }
+      } else {
+        return templateView(req, res, docs);
+      }
+    });
 };
+
+var templateView = exports.get.templateView = function (req, res, docs) {
+  var scripts = Scripts.files;
+  //render js & css
+  navi.gator(req, function (gator) {
+
+    que.embed(req, function (queued) {
+
+      res.render('pages/forums/view', {
+        title: 'Welcome ',
+        que: {
+          head: queued.head,
+          foot: queued.foot
+        },
+        nav: gator,
+        user: req.user,
+        docs: docs
+      });
+    });
+  });
+}
 
 exports.post.modify = function (req, res) {
 
@@ -117,7 +141,7 @@ exports.post.modify = function (req, res) {
 };
 
 exports.get.modify = function (req, res) {
-  
+
   var scripts = Scripts.files;
   //render our form from the model
     //render js & css
@@ -125,7 +149,7 @@ exports.get.modify = function (req, res) {
 
       que.embed(req, function (queued) {
 
-        res.render('pages/forums/edit', {
+        res.render('pages/forums/update', {
           title: 'Welcome ',
           dest: 'forum',
           form: {uri: '/f/update', method: 'POST'},

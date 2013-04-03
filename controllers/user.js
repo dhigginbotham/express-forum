@@ -47,7 +47,6 @@ exports.add = function (req, res) {
         return res.redirect('/');
       });
     } else {
-      console.log(err);
       req.session.messages = {cls: ' alert-block', title: 'Error!', msg: 'looks like we had an issue registering your account, please try again'};
       res.redirect('/register');
     }
@@ -133,6 +132,7 @@ exports.get.view = function (req, res) {
 };
 
 exports.getlogin = function(req, res) {
+  
   //get shorter reference of register form model
   var login = Forms.login;
   var scripts = Scripts.files;
@@ -190,6 +190,7 @@ exports.getlogin = function(req, res) {
 // };
 
 exports.postAccount = function (req, res, next) {
+
   var user = {
     first_name: req.body.first_name,
     last_name: req.body.last_name
@@ -197,10 +198,10 @@ exports.postAccount = function (req, res, next) {
 
   User.update({ username: req.user.username }, user, {safe: true}, function (err) {
     if (!err) {
-      return res.redirect('/account#settings');
+      return res.redirect('/a#settings');
     } else {
       req.session.messages = [info.message];
-      return res.redirect('/account');
+      return res.redirect('/a');
     }
   });
 };
@@ -215,10 +216,10 @@ exports.get.makeAdmin = function (req, res) {
   User.update({ username: req.user.username }, user, {safe: true}, function (err) {
     if (!err) {
       req.session.messages = 'You are teh admin nao';
-      return res.redirect('/account');
+      return res.redirect('/a');
     } else {
       req.session.messages = 'Oh, sorry no admin for you apparently :(';
-      return res.redirect('/account#error');
+      return res.redirect('/a#error');
     }
   });
 };
@@ -269,20 +270,19 @@ exports.post.modify = function (req, res) {
   Method: Post
   */
 
-  var forum = {
-    name: req.body.forum_name,
+  var user = {
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
     ip: req.ip,
-    desc: req.body.forum_desc,
-    parent: req.body.forum_parent,
     updated: new Date()
   };
 
-  Forum.update({ username: req.user.username }, forum, {safe: true}, function (err) {
+  User.update({ username: req.user.username }, user, {safe: true}, function (err) {
     if (!err) {
-      return res.redirect('/a/update');
+      return res.redirect('/a#settings');
     } else {
       req.session.messages = [info.message];
-      return res.redirect('/a/update#error');
+      return res.redirect('/a');
     }
   });
 };

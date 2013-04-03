@@ -27,6 +27,16 @@ db.once('open', function callback() {
   console.log('Connected to DB');
 });
 
+var makeSlug = function (value) {
+// Generates a URL-friendly "slug" from a provided string.
+// For example: "This Is Great!!!" transforms into "this-is-great"
+  // 1) convert to lowercase
+  // 2) remove dashes and pluses
+  // 3) replace spaces with dashes
+  // 4) remove everything but alphanumeric characters and dashes
+  return value.toLowerCase().replace(/-+/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+};
+
 /*
   define UserSchema
 */
@@ -89,9 +99,9 @@ UserSchema.methods.generateRandomToken = function () {
 
 var ForumSchema = new Schema({
   id: { type: ObjectId, index: true }, //++i
-  name: { type: String, required: true }, //string 50
+  name: { type: String, required: true, unique: true }, //string 50
   parent: { type: ObjectId }, //string 50
-  slug: String, //string 50
+  slug: { type: String, unique: true}, //string 50
   desc: String, //string 255
   updated: { type: Date, default: Date.now }, //datetime
   ip: { type: String, required: true },
@@ -109,15 +119,6 @@ ForumSchema.pre('save', function (next) {
   }
 });
 
-var makeSlug = function (value) {
-// Generates a URL-friendly "slug" from a provided string.
-// For example: "This Is Great!!!" transforms into "this-is-great"
-  // 1) convert to lowercase
-  // 2) remove dashes and pluses
-  // 3) replace spaces with dashes
-  // 4) remove everything but alphanumeric characters and dashes
-  return value.toLowerCase().replace(/-+/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-};
 
 /*
   define TopicSchema
@@ -168,11 +169,11 @@ var Message = exports.Message = mongoose.model('Message', MessageSchema);
 //   }
 // });
 
-var forer = new Forum({name: 'some random name with slug fun', ip: '127.0.0.1'});
-forer.save(function(err) {
-  if(err) {
-    console.log(err);
-  } else {
-    console.log('forum: ' + forer.name + " saved.");
-  }
-});
+// var forer = new Forum({name: 'some random name with slug fun', ip: '127.0.0.1'});
+// forer.save(function(err) {
+//   if(err) {
+//     console.log(err);
+//   } else {
+//     console.log('forum: ' + forer.name + " saved.");
+//   }
+// });

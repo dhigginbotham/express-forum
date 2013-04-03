@@ -34,7 +34,9 @@
         </form>
       </div>
       <div class="tab-pane fade in" id="profile">
-
+        <div class="well">
+          <a href="/logout" class="btn btn-large">Logout</a>
+        </div>
       </div>
       <div class="tab-pane fade in" id="messages">
 
