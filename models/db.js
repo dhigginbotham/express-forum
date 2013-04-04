@@ -34,16 +34,20 @@ var makeSlug = function (value) {
   // 2) remove dashes and pluses
   // 3) replace spaces with dashes
   // 4) remove everything but alphanumeric characters and dashes
-  return value.toLowerCase().replace(/-+/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  return value.toLowerCase().replace(/-+./g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 };
 /*
   define UserSchema
 */
 
+var ParentSchema = new Schema({
+  _id: { type: String, index: true },
+  parent: { type: String }
+});
+
 var UserSchema = new Schema({
-  id: { type: ObjectId, index: true },
   username: { type: String, required: true, unique: true },
-  password: { type: String, require: true },
+  password: { type: String, required: true },
   admin: { type: Boolean, required: true, default: false },
   first_name: String,
   last_name: String,
@@ -100,17 +104,36 @@ UserSchema.methods.generateRandomToken = function () {
 };
 
 /*
+  define TopicSchema
+*/
+
+var TopicSchema = new Schema({
+  _id: { type: String, index: true }, //forum the msg is posted in
+  user: [{type: ObjectId, ref: 'User'}], //user id
+  title: { type: String, required: true }, //string 200
+  slug: String, //string 200
+  created: { type: Date, default: Date.now }, //datetime
+  updated: { type: Date }, //datetime
+  ip: { type: String, required: true },
+  parent: { type: ObjectId, ref: 'Forum' }, //int
+  child: { type: ObjectId, ref: 'Topic' }, //int
+  message: { type: String, required: true } //text
+});
+
+/*
   define ForumSchema
 */
 
 var ForumSchema = new Schema({
-  id: { type: ObjectId, index: true }, //++i
+  _id: { type: String, index: true }, //++i
   name: { type: String, required: true, unique: true }, //string 50
-  parent: { type: ObjectId }, //string 50
   slug: { type: String, unique: true}, //string 50
+  parent: [{ type: ObjectId, ref: 'Forum'}], //string 50
+  child: [{ type: ObjectId, ref: 'Topic'}], //string 50
   desc: String, //string 255
-  updated: { type: Date, default: Date.now }, //datetime
+  user: [{type: ObjectId, ref: 'User'}],
   ip: { type: String, required: true },
+  updated: { type: Date, default: Date.now }, //datetime
   created: { type: Date, default: Date.now } //datetime
 });
 
@@ -125,31 +148,12 @@ ForumSchema.pre('save', function (next) {
   }
 });
 
-
-/*
-  define TopicSchema
-*/
-
-var TopicSchema = new Schema({
-  id: { type: ObjectId, index: true }, //forum the msg is posted in
-  forum: { type: ObjectId }, //++i
-  user: {}, //user id
-  title: { type: String, required: true }, //string 200
-  slug: String, //string 200
-  created: { type: Date, default: Date.now }, //datetime
-  updated: { type: Date, default: Date.now }, //datetime
-  count: Number, //int
-  ip: { type: String, required: true },
-  parent: { type: ObjectId }, //int
-  message: { type: String, required: true } //text
-});
-
 /*
   define MessageSchema
 */
 
 var MessageSchema = new Schema({
-  id: { type: ObjectId, index: true }, //++i
+  _id: { type: ObjectId, index: true }, //++i
   from: String, //user id from
   to: { type: String, required: true }, //user id to
   title: { type: String, required: true }, //string 200
