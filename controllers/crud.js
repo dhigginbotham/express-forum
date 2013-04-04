@@ -75,7 +75,8 @@ exports.post.create = function (req, res) {
     name: req.body.forum_name,
     ip: req.ip,
     desc: req.body.forum_desc,
-    parent: req.body.forum_parent
+    user: req.user._id,
+    _parent: req.body.forum_parent
   });
 
   forum.save(function (err) {

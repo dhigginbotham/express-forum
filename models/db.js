@@ -40,11 +40,6 @@ var makeSlug = function (value) {
   define UserSchema
 */
 
-var ParentSchema = new Schema({
-  _id: { type: String, index: true },
-  parent: { type: String }
-});
-
 var UserSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
@@ -109,14 +104,14 @@ UserSchema.methods.generateRandomToken = function () {
 
 var TopicSchema = new Schema({
   _id: { type: String, index: true }, //forum the msg is posted in
+  _parent: [{ type: String, ref: 'Forum'}], //string 50
+  _child: [{ type: String, ref: 'Topic'}], //string 50
   user: [{type: ObjectId, ref: 'User'}], //user id
   title: { type: String, required: true }, //string 200
   slug: String, //string 200
   created: { type: Date, default: Date.now }, //datetime
   updated: { type: Date }, //datetime
   ip: { type: String, required: true },
-  parent: { type: ObjectId, ref: 'Forum' }, //int
-  child: { type: ObjectId, ref: 'Topic' }, //int
   message: { type: String, required: true } //text
 });
 
@@ -126,10 +121,10 @@ var TopicSchema = new Schema({
 
 var ForumSchema = new Schema({
   _id: { type: String, index: true }, //++i
+  _parent: [{ type: String, ref: 'Forum'}], //string 50
+  _child: [{ type: String, ref: 'Topic'}], //string 50
   name: { type: String, required: true, unique: true }, //string 50
   slug: { type: String, unique: true}, //string 50
-  parent: [{ type: ObjectId, ref: 'Forum'}], //string 50
-  child: [{ type: ObjectId, ref: 'Topic'}], //string 50
   desc: String, //string 255
   user: [{type: ObjectId, ref: 'User'}],
   ip: { type: String, required: true },
