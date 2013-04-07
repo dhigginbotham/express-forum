@@ -1,6 +1,6 @@
 {
   "name": "express-forum",
-  "version": "0.2.6-1",
+  "version": "0.2.6-2",
   "private": true,
   "scripts": {
     "start": "node app.js"
@@ -14,7 +14,8 @@
     "passport": "0.1.x",
     "passport-local": "0.1.6",
     "bcrypt": "0.7.5",
-    "crypto": "*"
+    "crypto": "*",
+    "moment": "2.0.0"
   },
   "subdomain": "xfm-beta",
   "engines": {

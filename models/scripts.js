@@ -25,5 +25,6 @@ scripts.files = [
   {src : '/js/helpers.js', name : 'helpers.js', where : 'foot', uri : null, type : 'js'},
   {src : '/js/register.js', name : 'register.js', where : 'foot', uri : '/register', type : 'js'},
   {src : '/js/crud.js', name : 'crud.js', where : 'foot', uri : '/f/create', type : 'js'},
+  {src : '/js/moment.js', name : 'moment.js', where : 'foot', uri : null, type : 'js'},
   {src : '//js.nicedit.com/nicEdit-latest.js', name : 'nicEdit-latest.js', where : 'foot', uri : '/f/create', type : 'js'}
 ];
