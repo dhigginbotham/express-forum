@@ -1,5 +1,8 @@
-### express-forum
+#express-forum
 Here's a node.js forum in the making. Socket.IO, Bootstrap UI and Express.js -- sounds about right for a forum these days. Uses passport, currently only supports local strategy, but I plan on adding the big four in soon.
+
+###Version
+0.2.2
 
 ###Todos
 - crud api methods and routes
@@ -11,58 +14,60 @@ Here's a node.js forum in the making. Socket.IO, Bootstrap UI and Express.js -- 
 - map app module for prefix crud routes
 
 ###API Routes
-These are a work in progress, basically drawing board until I make some real definitions:
+These are subject to change but this is the intended outcome:
+
+##Forum Routes:
 ```
-  /a || /u || /f ??
-    /new
-    /delete
-    /update
-    /view
-
-  inherit next from parent id/slug?
-  .../forums
-      /new
-      /delete
-      /update
-      /view
-  .../topics
-      /new
-      /delete
-      /update
-      /view
-  .../messages
-      /new
-      /delete
-      /update
-      /view
-
-  example: :forum/new
-  example: :forum/delete
-  example: :forum/update
-  example: :forum (defaults to /view)
-
-  example: :forum/:topic/new
-  example: :forum/:topic/delete
-  example: :forum/:topic/update
-  example: :forum/:topic (defaults to /view)
-
-  /login
-  /register
-  /logout
+  forums/:id/new                                PUT
+  forums/:id/delete                             DELETE
+  forums/:id/update                             POST
+  forums/:id (defaults to /view)                GET
 ```
 
-###Version
-0.2
+##Topics Routes:
+```
+  forums/:id/topics/:id/new                     PUT
+  forums/:id/topics/:id/delete                  DELETE
+  forums/:id/topics/:id/update                  POST
+  forums/:id/topics/:id (defaults to /view)     GET
+```
 
-If you'd like to contribute to this project just shoot me a pull request.
+##Account Routes:
+```
+  account/:id/new                               PUT
+  account/:id/delete                            DELETE
+  account/:id/update                            POST
+  account/:id (defaults to /view)               GET
+```
+
+##Message Routes:
+```
+  messages/:id/new                               PUT
+  messages/:id/delete                            DELETE
+  messages/:id/update                            POST
+  messages/:id (defaults to /view)               GET
+```
+
 
 ###License
+```
 (The MIT License)
+Copyright (c) 2013 David Higginbotham (david@hillsoft.com)
 
-Copyright (c) 2013 [David Higginbotham](david@hillsoft.com)
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the 'Software'), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all 
+copies or substantial portions of the Software.
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS 
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR 
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER 
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION 
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
