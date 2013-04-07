@@ -319,15 +319,3 @@ exports.get.modify = function (req, res) {
     });
   });
 };
-
-exports.del.user = function (req, res) {
-
-  User.remove({ username: req.route.params.usr }, function (err) {
-    if (!err) {
-      return res.redirect('/a#settings');
-    } else {
-      req.session.messages = [info.message];
-      return res.redirect('/a');
-    }
-  });
-};

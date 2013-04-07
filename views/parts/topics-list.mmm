@@ -1,0 +1,21 @@
+  <table class="table table-bordered table-striped">
+    <colgroup>
+      <col class="span8">
+      <col class="span4">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Parent</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#docs}}
+      <tr>
+        <td><a href="{{_id}}/view">{{name}}</a></td>
+        <td>{{_parent}}</td>
+      </tr>
+    {{/docs}}
+    </tbody>
+  </table>
+  <a href="?json=true" class="btn btn-primary btn-small">Switch to JSON View</a>

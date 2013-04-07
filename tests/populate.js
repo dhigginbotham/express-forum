@@ -5,7 +5,7 @@ makeSample.init = function () {
 };
 
 makeSample.forum = function () {
-  var forum = new Forum({name: 'Sample Forum Name', ip: '127.0.0.1'});
+  var forum = new Forum({name: 'General Discussion', ip: '127.0.0.1'});
 
   forum.save(function (err) {
     if (!err) {
