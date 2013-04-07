@@ -32,9 +32,13 @@ exports.get = {};
 exports.post = {};
 
 exports.add = function (req, res) {
+  var id = req.body.username;
+
+  console.log(id);
+
   var user = new User({
-    _id: req.body.username,
-    username : req.body.username,
+    _id: id,
+    username : id,
     password : req.body.password,
     ip: req.ip,
     first_name: req.body.first_name || null,
@@ -49,8 +53,9 @@ exports.add = function (req, res) {
         return res.redirect('/');
       });
     } else {
-      req.session.messages = {cls: ' alert-block', title: 'Error!', msg: 'looks like we had an issue registering your account, please try again'};
-      res.redirect('/register');
+      req.session.messages = {cls: ' alert-block', title: 'Error!', msg: 'bad sause!'};
+      console.log(err);
+      return res.redirect('/register');
     }
   });
 };

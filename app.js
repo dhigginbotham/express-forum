@@ -58,7 +58,12 @@ app.post('/f/create', pass.ensureAuthenticated, crud_routes.post.create);
 
 app.get('/f/:fid/all', pass.ensureAuthenticated, topic_routes.get.view);
 
-app.get('/t/view', pass.ensureAuthenticated, topic_routes.get.view);
+app.post('/f/:fid/create', pass.ensureAuthenticated, topic_routes.post.create);
+
+app.get('/f/:fid/:tid/view', pass.ensureAuthenticated, topic_routes.get.view);
+
+app.get('/t/create', pass.ensureAuthenticated, topic_routes.get.create);
+
 
 app.get('/f/view', pass.ensureAuthenticated, pass.ensureAdmin(), crud_routes.get.view);
 
