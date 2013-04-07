@@ -1,0 +1,26 @@
+{{> parts/navi}}
+
+  <div class="well">
+    {{#flash}}
+      <div class="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{flash}}
+      </div>
+    {{/flash}}
+    <form action="{{form.uri}}" method="{{form.method}}" id="create">
+      <fieldset>
+        <div class="control-group">
+          <label for="topic_name" class="control-label">Topic Title: </label>
+          <input name="topic_name" id="topic_name" class="input input-block input-block-level" type="text" />
+        </div>
+        <div class="control-group">
+          <label for="topic_desc" class="control-label">Message: </label>
+          <textarea name="topic_desc" id="topic_desc" style="width: 100%" rows="10"></textarea>
+        </div>
+        <div class="form-actions">
+          <input type="submit" value="Save" class="btn btn-large btn-primary" id="submit" />
+          <a href="/" class="btn btn-large btn-secondary">Cancel</a>
+        </div>
+      </fieldset>
+    </form>
+  </div>

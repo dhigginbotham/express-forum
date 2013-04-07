@@ -1,0 +1,4 @@
+{{! toolbar }}
+<a href="create" class="btn pull-right"><i class="icon-plus"></i> New Topic</a>
+<h2>Forum Name</h2>
+<hr />

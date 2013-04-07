@@ -71,7 +71,7 @@ routes.get.viewSingle = function (req, res) {
 
         que.embed(req, function (queued) {
 
-          res.render('pages/topics/view', {
+          res.render('pages/topics/single', {
             title: 'xfm-beta ',
             que: {
               head: queued.head,
@@ -106,14 +106,14 @@ routes.get.create = function (req, res) {
 
       que.embed(req, function (queued) {
 
-        res.render('pages/forums/add', {
+        res.render('pages/topics/create', {
           title: 'xfm-beta ',
           que: {
             head: queued.head,
             foot: queued.foot
           },
           nav: gator,
-          form: {uri: '/t/create', method: 'POST'},
+          form: {uri: 'create', method: 'POST'},
           parents: forums,
           user: req.user,
           flash: req.session.messages
@@ -124,26 +124,30 @@ routes.get.create = function (req, res) {
 };
 
 routes.post.create = function (req, res) {
+  var fid = [];
 
-  if (req.body.forum_parent === 'none') {
-    req.body.forum_parent = null;
+  if (req.route.params.fid) {
+    fid.push(req.route.params.fid);
   }
 
   var topic = new Topic({
-    name: req.body.forum_name,
+    name: req.body.topic_name,
     ip: req.ip,
-    desc: req.body.forum_desc,
+    message: req.body.topic_desc,
     user: req.user._id,
-    _parent: req.body.forum_parent
+    _parent: fid
   });
 
   topic.save(function (err) {
     if (err) {
+      console.log(err);
       req.session.messages = JSON.stringify(err);
       res.redirect('#error');
+      // delete req.session.messages;
     } else {
       req.session.messages = 'awesome you added a topic!';
       res.redirect('#success');
+      // delete req.session.messages;
     }
   });
 };

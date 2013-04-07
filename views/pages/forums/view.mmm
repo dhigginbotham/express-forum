@@ -1,3 +1,2 @@
 {{> parts/navi }}
-
-{{> parts/forum-table}}
+{{> parts/forum-table }}

@@ -1,0 +1,12 @@
+{{! single }}
+{{> parts/navi }}
+
+<div class="span4">
+  
+</div>
+<div class="span8">
+  {{#docs}}
+  <h2>{{name}}</h2>
+  <p>{{message}}</p>
+  {{/docs}}
+</div>
