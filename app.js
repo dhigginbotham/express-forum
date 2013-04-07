@@ -52,6 +52,10 @@ app.post('/a/update', pass.ensureAuthenticated, user_routes.post.modify);
 app.get('/a/view/all', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes.get.view);
 
 app.get('/a/view/:usr', pass.ensureAuthenticated, user_routes.get.viewUser);
+app.get('/a/view/:usr', pass.ensureAuthenticated, user_routes.get.viewUser);
+
+app.get('/a/:usr/delete', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes.get.delete);
+app.get('/a/:usr/uplift', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes.get.uplift);
 
 app.get('/f/create', pass.ensureAuthenticated, pass.ensureAdmin(), crud_routes.get.create);
 app.post('/f/create', pass.ensureAuthenticated, pass.ensureAdmin(), crud_routes.post.create);

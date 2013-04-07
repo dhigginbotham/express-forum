@@ -50,7 +50,7 @@ exports.add = function (req, res) {
     if (!err) {
       req.logIn(user, function(err) {
         if (err) { return next(err); }
-        return res.redirect('/');
+        return res.redirect('/f/view');
       });
     } else {
       req.session.messages = {cls: ' alert-block', title: 'Error!', msg: 'bad sause!'};
@@ -262,7 +262,7 @@ exports.postlogin = function(req, res, next) {
     }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-      return res.redirect('/');
+      return res.redirect('/f/view');
     });
   })(req, res, next);
 };
@@ -322,5 +322,33 @@ exports.get.modify = function (req, res) {
 
     //end socket.io        
     });
+  });
+};
+
+exports.get.uplift = function (req, res) {
+
+  var user = {
+    admin: true
+  };
+
+  User.update({ _id: req.route.params.usr }, user, {safe: true}, function (err) {
+    if (!err) {
+      return res.redirect('/a#settings');
+    } else {
+      req.session.messages = [info.message];
+      return res.redirect('/a');
+    }
+  });
+};
+
+exports.get.delete = function (req, res) {
+
+  User.remove({ _id: req.route.params.usr }, {safe: true}, function (err) {
+    if (!err) {
+      return res.redirect('/a#settings');
+    } else {
+      req.session.messages = [info.message];
+      return res.redirect('/a');
+    }
   });
 };
