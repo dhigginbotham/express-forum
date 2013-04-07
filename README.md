@@ -5,47 +5,42 @@ Here's a node.js forum in the making. Socket.IO, Bootstrap UI and Express.js -- 
 0.2.6
 
 ##Todos
-- crud api methods and routes
-- scope issue, might sleep on it 
-- test all for loops for non async usage
-- design better template structure than current mess
+- clean up utter mess...
 - integrate [socket.io chat](https://github.com/dhigginbotham/rwi-chat)
-- Views: Create, Edit, View, Profile, Message, Photos/Media
-- map app module for prefix crud routes
 
 ##API Routes
 These are subject to change but this is the intended outcome:
 
 ###Forum Routes:
 ```
-  forums/:id/new                                PUT
-  forums/:id/delete                             DELETE
-  forums/:id/update                             POST
-  forums/:id (defaults to /view)                GET
+  /f/:id/new                                     PUT         ** POST **
+  /f/:id/delete                                  DELETE
+  /f/:id/update                                  POST
+  /f/:id (defaults to /view)                     GET
 ```
 
 ###Topics Routes:
 ```
-  forums/:id/topics/:id/new                     PUT
-  forums/:id/topics/:id/delete                  DELETE
-  forums/:id/topics/:id/update                  POST
-  forums/:id/topics/:id (defaults to /view)     GET
+  /f/:fid/:tid/new                               PUT         ** POST **
+  /f/:fid/:tid/delete                            DELETE
+  /f/:fid/:tid/update                            POST
+  /f/:fid/:tid (defaults to /view)               GET
 ```
 
 ###Account Routes:
 ```
-  account/:id/new                               PUT
-  account/:id/delete                            DELETE
-  account/:id/update                            POST
-  account/:id (defaults to /view)               GET
+  /a/:id/new                                     PUT         ** POST **
+  /a/:id/delete                                  DELETE
+  /a/:id/update && /a                            POST
+  /a/:id (defaults to /view)                     GET
 ```
 
 ###Message Routes:
 ```
-  messages/:id/new                               PUT
-  messages/:id/delete                            DELETE
-  messages/:id/update                            POST
-  messages/:id (defaults to /view)               GET
+  /m/:id/new                                     PUT         ** POST **
+  /m/:id/delete                                  DELETE
+  /m/:id/update                                  POST
+  /m/:id (defaults to /view)                     GET
 ```
 
 ##License
