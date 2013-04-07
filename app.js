@@ -53,9 +53,8 @@ app.get('/a/view/all', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes
 
 app.get('/a/view/:usr', pass.ensureAuthenticated, user_routes.get.viewUser);
 
-app.get('/f/create', pass.ensureAuthenticated, crud_routes.get.create);
-app.post('/f/create', pass.ensureAuthenticated, crud_routes.post.create);
-
+app.get('/f/create', pass.ensureAuthenticated, pass.ensureAdmin(), crud_routes.get.create);
+app.post('/f/create', pass.ensureAuthenticated, pass.ensureAdmin(), crud_routes.post.create);
 
 app.get('/f/:fid/all', pass.ensureAuthenticated, topic_routes.get.view);
 
@@ -64,7 +63,7 @@ app.get('/f/:fid/create', pass.ensureAuthenticated, topic_routes.get.create);
 
 app.get('/f/:fid/:tid/view', pass.ensureAuthenticated, topic_routes.get.viewSingle);
 
-app.get('/f/view', pass.ensureAuthenticated, pass.ensureAdmin(), crud_routes.get.view);
+app.get('/f/view', pass.ensureAuthenticated, crud_routes.get.view);
 
 app.get('/f/update', pass.ensureAuthenticated, pass.ensureAdmin(), crud_routes.get.modify);
 app.post('/f/update', pass.ensureAuthenticated, pass.ensureAdmin(), crud_routes.post.modify);

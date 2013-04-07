@@ -6,7 +6,7 @@ navi.auth = [
   {std : 'Account', id : 'view-account', icon : 'group', cur : null, href : '/a', token : null},
   {std : 'View All Users', id : 'view-all-users', icon : 'eye-open', cur : null, href : '/a/view/all', token : null},
   // {std : 'Logout', id : 'logout', icon : null, cur : null, href : '/logout', token : null},
-  {std : 'Add Forum', id : 'add-forums', icon : 'key', cur : null, href : '/f/create', token : null},
+  // {std : 'Add Forum', id : 'add-forums', icon : 'key', cur : null, href : '/f/create', token : null},
   {std : 'View Forums', id : 'view-forums', icon : 'dashboard', cur : null, href : '/f/view', token : null}
 ];
 

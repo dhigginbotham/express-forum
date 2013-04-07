@@ -95,7 +95,7 @@ exports.get.view = function (req, res) {
   Route: :f/view
   Method: Get
   */
-    Forum.find({}, function(err, docs) {
+    Forum.find({}).populate('user _parent').exec( function(err, docs) {
       if (req.query.json) {
         if (!err) {
           res.send(docs);
@@ -103,29 +103,29 @@ exports.get.view = function (req, res) {
           req.session.messages = 'something bad happened';
         }
       } else {
-        return templateView(req, res, docs);
+        //render js & css
+        navi.gator(req, function (gator) {
+
+          que.embed(req, function (queued) {
+
+            res.render('pages/forums/view', {
+              title: 'xfm-beta ',
+              que: {
+                head: queued.head,
+                foot: queued.foot
+              },
+              nav: gator,
+              user: req.user,
+              docs: docs,
+              agent: docs.user
+            });
+          });
+        });
       }
     });
 };
 
 var templateView = exports.get.templateView = function (req, res, docs) {
-  //render js & css
-  navi.gator(req, function (gator) {
-
-    que.embed(req, function (queued) {
-
-      res.render('pages/forums/view', {
-        title: 'xfm-beta ',
-        que: {
-          head: queued.head,
-          foot: queued.foot
-        },
-        nav: gator,
-        user: req.user,
-        docs: docs
-      });
-    });
-  });
 }
 
 exports.post.modify = function (req, res) {

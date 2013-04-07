@@ -1,6 +1,7 @@
+{{#user.admin}}<a href="/f/create" class="btn pull-right"><i class="icon-plus"></i> New Forum</a>{{/user.admin}}
 <h2>Forums</h2>
 <hr />
-
+{{agent}}
 <table class="table table-bordered table-striped">
   <colgroup>
     <col class="span8">

@@ -1,5 +1,9 @@
 {{>parts/navi}}
 
+{{! toolbar }}
+<h2>Account Settings</h2>
+<hr />
+
 <div class="row">
   <div class="span3">
   {{>parts/my-sidebar}}

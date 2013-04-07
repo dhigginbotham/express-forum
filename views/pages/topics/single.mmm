@@ -1,6 +1,11 @@
 {{! single }}
 {{> parts/navi }}
 
+{{! toolbar }}
+<a href="#reply" class="btn btn-primary pull-right"><i class="icon-plus"></i> Reply</a>
+{{#docs}}<h3>{{#_parent}}{{name}}{{/_parent}} - {{name}}</h3>{{/docs}}
+<hr />
+
 <div class="row">
   <div class="span3">
     {{#docs}}
@@ -15,7 +20,7 @@
     {{#docs}}
     <h5>{{name}} <span class="small pull-right">{{created}}</span></h5>
     <hr />
-    <p>{{message}}</p>
+    <p>{{{message}}}</p>
     {{/docs}}
   </div>
 </div>
