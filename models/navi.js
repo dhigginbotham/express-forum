@@ -7,7 +7,8 @@ navi.auth = [
   {std : 'View All Users', id : 'view-all-users', icon : 'eye-open', cur : null, href : '/a/view/all', token : null},
   // {std : 'Logout', id : 'logout', icon : null, cur : null, href : '/logout', token : null},
   {std : 'Add Forum', id : 'add-forums', icon : 'key', cur : null, href : '/f/create', token : null},
-  {std : 'View Forums', id : 'view-forums', icon : 'dashboard', cur : null, href : '/f/view', token : null}
+  {std : 'View Forums', id : 'view-forums', icon : 'dashboard', cur : null, href : '/f/view', token : null},
+  {std : 'View Topics', id : 'view-topics', icon : null, cur : null, href : '/t/view', token : null}
 ];
 
 navi.noauth = [

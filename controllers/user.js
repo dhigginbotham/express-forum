@@ -91,34 +91,34 @@ exports.get.view = function (req, res) {
   Route: :f/view
   Method: Get
   */
-    User.find({}, function(err, docs) {
-      if (req.query.json) {
-        if (!err) {
-          res.send(docs);
-        } else {
-          req.session.messages = 'something bad happened';
-        }
+  User.find({}, function(err, docs) {
+    if (req.query.json) {
+      if (!err) {
+        res.send(docs);
       } else {
-        var scripts = Scripts.files;
-        //render js & css
-        navi.gator(req, function (gator) {
+        req.session.messages = 'something bad happened';
+      }
+    } else {
+      var scripts = Scripts.files;
+      //render js & css
+      navi.gator(req, function (gator) {
 
-          que.embed(req, function (queued) {
+        que.embed(req, function (queued) {
 
-            res.render('pages/accounts/users', {
-              title: 'xfm-beta ',
-              que: {
-                head: queued.head,
-                foot: queued.foot
-              },
-              nav: gator,
-              user: req.user,
-              docs: docs
-            });
+          res.render('pages/accounts/users', {
+            title: 'xfm-beta ',
+            que: {
+              head: queued.head,
+              foot: queued.foot
+            },
+            nav: gator,
+            user: req.user,
+            docs: docs
           });
         });
-      }
-    });
+      });
+    }
+  });
 };
 
 exports.get.viewUser = function (req, res) {
@@ -269,19 +269,12 @@ exports.logout = function(req, res) {
 
 exports.post.modify = function (req, res) {
 
-  /**
-  Route: :a/update
-  Method: Post
-  */
-
   var user = {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     email: req.body.email,
     location: req.body.location,
     signature: req.body.signature,
-    location: req.body.location,
-    email: req.body.email,
     ip: req.ip,
     updated: new Date()
   };
@@ -297,36 +290,44 @@ exports.post.modify = function (req, res) {
 };
 
 exports.get.modify = function (req, res) {
+
   var email = req.user.email;
   var hash = crypto.createHash('md5').update(email).digest("hex");
-
-  /**
-  Route: :a/update
-  Method: Get
-  */
 
   var scripts = Scripts.files;
     //render js & css
     navi.gator(req, function (gator) {
 
-      que.embed(req, function (queued) {
+    que.embed(req, function (queued) {
 
-        res.render('pages/accounts/update', {
-          title: 'xfm-beta ',
-          dest: 'forum',
-          form: {uri: '/a/update', method: 'POST'},
-          que: {
-            head: queued.head,
-            foot: queued.foot
-          },
-          nav: gator,
-          user: req.user,
-          hash: hash,
-          flash: req.session.messages
-        });
-      //start socket.io
-
-      //end socket.io        
+      res.render('pages/accounts/update', {
+        title: 'xfm-beta ',
+        dest: 'forum',
+        form: {uri: '/a/update', method: 'POST'},
+        que: {
+          head: queued.head,
+          foot: queued.foot
+        },
+        nav: gator,
+        user: req.user,
+        hash: hash,
+        flash: req.session.messages
       });
+    //start socket.io
+
+    //end socket.io        
     });
+  });
+};
+
+exports.del.user = function (req, res) {
+
+  User.remove({ username: req.route.params.usr }, function (err) {
+    if (!err) {
+      return res.redirect('/a#settings');
+    } else {
+      req.session.messages = [info.message];
+      return res.redirect('/a');
+    }
+  });
 };

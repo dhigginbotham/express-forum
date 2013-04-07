@@ -109,7 +109,6 @@ exports.get.view = function (req, res) {
 };
 
 var templateView = exports.get.templateView = function (req, res, docs) {
-  var scripts = Scripts.files;
   //render js & css
   navi.gator(req, function (gator) {
 
@@ -155,10 +154,6 @@ exports.post.modify = function (req, res) {
 };
 
 exports.get.modify = function (req, res) {
-
-  var scripts = Scripts.files;
-
-  console.log(scripts);
 
   //render js & css
   navi.gator(req, function (gator) {

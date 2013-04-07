@@ -14,6 +14,7 @@ var db = require('./models/db'),
 var controllers = require('./controllers'),
   user_routes = require('./controllers/user'),
   crud_routes = require('./controllers/crud'),
+  topic_routes = require('./controllers/topics'),
   path = require('path');
 
 app.configure(function () {
@@ -54,6 +55,10 @@ app.get('/a/view/:usr', pass.ensureAuthenticated, user_routes.get.viewUser);
 
 app.get('/f/create', pass.ensureAuthenticated, crud_routes.get.create);
 app.post('/f/create', pass.ensureAuthenticated, crud_routes.post.create);
+
+app.get('/f/:fid/all', pass.ensureAuthenticated, topic_routes.get.view);
+
+app.get('/t/view', pass.ensureAuthenticated, topic_routes.get.view);
 
 app.get('/f/view', pass.ensureAuthenticated, pass.ensureAdmin(), crud_routes.get.view);
 
