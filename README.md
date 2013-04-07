@@ -2,7 +2,7 @@
 Here's a node.js forum in the making. Socket.IO, Bootstrap UI and Express.js -- sounds about right for a forum these days. Uses passport, currently only supports local strategy, but I plan on adding the big four in soon.
 
 ###Version
-0.2.2
+0.2.5
 
 ##Todos
 - crud api methods and routes

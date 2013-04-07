@@ -58,7 +58,7 @@ routes.get.viewSingle = function (req, res) {
     __q = {_id: req.route.params.tid};
   }
 
-  Topic.find(__q, function (err, docs) {
+  Topic.find(__q).populate('user _parent').exec( function (err, docs) {
     if (req.query.json) {
       if (!err) {
         res.send(docs);
@@ -143,11 +143,11 @@ routes.post.create = function (req, res) {
       console.log(err);
       req.session.messages = JSON.stringify(err);
       res.redirect('#error');
-      // delete req.session.messages;
+      delete req.session.messages;
     } else {
       req.session.messages = 'awesome you added a topic!';
       res.redirect('#success');
-      // delete req.session.messages;
+      delete req.session.messages;
     }
   });
 };

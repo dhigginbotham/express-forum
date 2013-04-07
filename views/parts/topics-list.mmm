@@ -5,15 +5,15 @@
     </colgroup>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Parent</th>
+        <th>Title</th>
+        <th>Created</th>
       </tr>
     </thead>
     <tbody>
     {{#docs}}
       <tr>
         <td><a href="{{_id}}/view">{{name}}</a></td>
-        <td>{{_parent}}</td>
+        <td>{{created}}</td>
       </tr>
     {{/docs}}
     </tbody>

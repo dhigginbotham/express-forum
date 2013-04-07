@@ -1,3 +1,4 @@
+<script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
 {{> parts/navi}}
 
   <div class="well">
@@ -24,3 +25,10 @@
       </fieldset>
     </form>
   </div>
+<script>
+    //<![CDATA[
+    bkLib.onDomLoaded(function() {
+        new nicEditor({buttonList : ['fontSize','bold','italic','underline','strikeThrough','subscript','superscript','html']}).panelInstance('topic_desc');
+    });
+    //]]>
+</script>

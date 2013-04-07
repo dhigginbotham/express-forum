@@ -1,12 +1,26 @@
 {{! single }}
 {{> parts/navi }}
 
-<div class="span4">
-  
+<div class="row">
+  <div class="span3">
+    {{#docs}}
+      {{#user}}
+        <h4><a href="/a/view/{{username}}">{{username}}</a></h4>
+        {{#first_name}}<p>{{first_name}} {{last_name}}{{/first_name}}</p>
+        <p>Location: {{location}}</p>
+      {{/user}}
+    {{/docs}}
+  </div>
+  <div class="span9">
+    {{#docs}}
+    <h5>{{name}} <span class="small pull-right">{{created}}</span></h5>
+    <hr />
+    <p>{{message}}</p>
+    {{/docs}}
+  </div>
 </div>
-<div class="span8">
-  {{#docs}}
-  <h2>{{name}}</h2>
-  <p>{{message}}</p>
-  {{/docs}}
+<hr />
+<div class="well">
+  <a href="#reply" class="btn">Quick Reply</a>
 </div>
+
