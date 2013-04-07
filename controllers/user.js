@@ -33,6 +33,7 @@ exports.post = {};
 
 exports.add = function (req, res) {
   var user = new User({
+    _id: req.body.username,
     username : req.body.username,
     password : req.body.password,
     ip: req.ip,

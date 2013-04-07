@@ -13,7 +13,7 @@ Here's a node.js forum in the making. Socket.IO, Bootstrap UI and Express.js -- 
 - Views: Create, Edit, View, Profile, Message, Photos/Media
 - map app module for prefix crud routes
 
-###PI Routes
+##API Routes
 These are subject to change but this is the intended outcome:
 
 ###Forum Routes:

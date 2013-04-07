@@ -157,27 +157,29 @@ exports.post.modify = function (req, res) {
 exports.get.modify = function (req, res) {
 
   var scripts = Scripts.files;
-  //render our form from the model
-    //render js & css
-    navi.gator(req, function (gator) {
 
-      que.embed(req, function (queued) {
+  console.log(scripts);
 
-        res.render('pages/forums/update', {
-          title: 'xfm-beta ',
-          dest: 'forum',
-          form: {uri: '/f/update', method: 'POST'},
-          que: {
-            head: queued.head,
-            foot: queued.foot
-          },
-          nav: gator,
-          user: req.user,
-          flash: req.session.messages
-        });
-      //start socket.io
+  //render js & css
+  navi.gator(req, function (gator) {
 
-      //end socket.io        
+    que.embed(req, function (queued) {
+
+      res.render('pages/forums/update', {
+        title: 'xfm-beta ',
+        dest: 'forum',
+        form: {uri: '/f/update', method: 'POST'},
+        que: {
+          head: queued.head,
+          foot: queued.foot
+        },
+        nav: gator,
+        user: req.user,
+        flash: req.session.messages
       });
+    //start socket.io
+
+    //end socket.io        
     });
+  });
 };

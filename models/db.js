@@ -41,6 +41,7 @@ var makeSlug = function (value) {
 */
 
 var UserSchema = new Schema({
+  _id: String,
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   admin: { type: Boolean, required: true, default: false },
@@ -106,15 +107,23 @@ var TopicSchema = new Schema({
   _id: { type: String, index: true }, //forum the msg is posted in
   _parent: [{ type: String, ref: 'Forum'}], //string 50
   _child: [{ type: String, ref: 'Topic'}], //string 50
-  user: [{type: ObjectId, ref: 'User'}], //user id
-  title: { type: String, required: true }, //string 200
-  slug: String, //string 200
+  user: [{type: String, ref: 'User'}], //user id
+  name: { type: String, required: true }, //string 200
   created: { type: Date, default: Date.now }, //datetime
   updated: { type: Date }, //datetime
   ip: { type: String, required: true },
   message: { type: String, required: true } //text
 });
 
+TopicSchema.pre('save', function (next) {
+
+  if(!this.isModified('name')) {
+    return next();
+  } else {
+    this._id = makeSlug(this.name);
+    return next();
+  }
+});
 /*
   define ForumSchema
 */
@@ -124,21 +133,19 @@ var ForumSchema = new Schema({
   _parent: [{ type: String, ref: 'Forum'}], //string 50
   _child: [{ type: String, ref: 'Topic'}], //string 50
   name: { type: String, required: true, unique: true }, //string 50
-  slug: { type: String, unique: true}, //string 50
   desc: String, //string 255
-  user: [{type: ObjectId, ref: 'User'}],
+  user: [{type: String, ref: 'User'}],
   ip: { type: String, required: true },
   updated: { type: Date, default: Date.now }, //datetime
   created: { type: Date, default: Date.now } //datetime
 });
 
 ForumSchema.pre('save', function (next) {
-  var forum = this;
 
-  if(!forum.isModified('name')) {
+  if(!this.isModified('name')) {
     return next();
   } else {
-    forum.slug = makeSlug(forum.name);
+    this._id = makeSlug(this.name);
     return next();
   }
 });
@@ -149,7 +156,7 @@ ForumSchema.pre('save', function (next) {
 
 var MessageSchema = new Schema({
   _id: { type: ObjectId, index: true }, //++i
-  from: String, //user id from
+  from: [{type: String, ref: 'User'}], //user id from
   to: { type: String, required: true }, //user id to
   title: { type: String, required: true }, //string 200
   created: { type: Date, default: Date.now }, //datetime
@@ -164,21 +171,3 @@ var User = exports.User = mongoose.model('User', UserSchema);
 var Forum = exports.Forum = mongoose.model('Forum', ForumSchema);
 var Topic = exports.Topic = mongoose.model('Topic', TopicSchema);
 var Message = exports.Message = mongoose.model('Message', MessageSchema);
-
-// var usr = new User({ username: 'dhz2', email: 'david@hillsoft.com', password: 'secret', admin: true });
-// usr.save(function(err) {
-//   if(err) {
-//     console.log(err);
-//   } else {
-//     console.log('user: ' + usr.username + " saved.");
-//   }
-// });
-
-// var forer = new Forum({name: 'some random name with slug fun', ip: '127.0.0.1'});
-// forer.save(function(err) {
-//   if(err) {
-//     console.log(err);
-//   } else {
-//     console.log('forum: ' + forer.name + " saved.");
-//   }
-// });
