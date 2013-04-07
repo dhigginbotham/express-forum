@@ -4,7 +4,7 @@ Here's a node.js forum in the making. Socket.IO, Bootstrap UI and Express.js -- 
 ###Version
 0.2.2
 
-###Todos
+##Todos
 - crud api methods and routes
 - scope issue, might sleep on it 
 - test all for loops for non async usage
@@ -13,10 +13,10 @@ Here's a node.js forum in the making. Socket.IO, Bootstrap UI and Express.js -- 
 - Views: Create, Edit, View, Profile, Message, Photos/Media
 - map app module for prefix crud routes
 
-###API Routes
+###PI Routes
 These are subject to change but this is the intended outcome:
 
-##Forum Routes:
+###Forum Routes:
 ```
   forums/:id/new                                PUT
   forums/:id/delete                             DELETE
@@ -24,7 +24,7 @@ These are subject to change but this is the intended outcome:
   forums/:id (defaults to /view)                GET
 ```
 
-##Topics Routes:
+###Topics Routes:
 ```
   forums/:id/topics/:id/new                     PUT
   forums/:id/topics/:id/delete                  DELETE
@@ -32,7 +32,7 @@ These are subject to change but this is the intended outcome:
   forums/:id/topics/:id (defaults to /view)     GET
 ```
 
-##Account Routes:
+###Account Routes:
 ```
   account/:id/new                               PUT
   account/:id/delete                            DELETE
@@ -40,7 +40,7 @@ These are subject to change but this is the intended outcome:
   account/:id (defaults to /view)               GET
 ```
 
-##Message Routes:
+###Message Routes:
 ```
   messages/:id/new                               PUT
   messages/:id/delete                            DELETE
@@ -48,8 +48,7 @@ These are subject to change but this is the intended outcome:
   messages/:id (defaults to /view)               GET
 ```
 
-
-###License
+##License
 ```
 (The MIT License)
 Copyright (c) 2013 David Higginbotham (david@hillsoft.com)
