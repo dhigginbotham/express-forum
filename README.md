@@ -27,6 +27,14 @@ These are subject to change but this is the intended outcome:
   /f/:fid/:tid (defaults to /view)               GET
 ```
 
+###Comments Routes: _highly experimental_
+```
+  /c/:id/new                                     PUT         ** POST **
+  /c/:id/delete                                  DELETE
+  /c/:id/update                                  POST
+  /c/:id (defaults to /view)                     GET
+```
+
 ###Account Routes:
 ```
   /a/:id/new                                     PUT         ** POST **
