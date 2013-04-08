@@ -1,6 +1,10 @@
 <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
 {{> parts/navi}}
 
+{{! toolbar }}
+<h2>Add Topic</h2>
+<hr />
+
   <div class="well">
     {{#flash}}
       <div class="alert">

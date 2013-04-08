@@ -21,7 +21,6 @@ routes.get.view = function (req, res) {
   if (req.route.params.fid) {
     __q = {_parent: req.route.params.fid};
   }
-
   Topic.find(__q).sort({'created': -1}).populate('user _parent _child').exec( function (err, docs) {
     if (req.query.json) {
       if (!err) {
@@ -61,7 +60,6 @@ routes.get.viewSingle = function (req, res) {
   Topic.find(__q).sort({'created': -1}).populate('user _parent _child').exec( function (err, docs) {
     if (req.query.json) {
       if (!err) {
-        res.send(docs);
       } else {
         req.session.messages = 'something bad happened';
       }

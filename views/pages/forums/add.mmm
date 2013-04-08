@@ -1,5 +1,9 @@
 {{> parts/navi}}
 
+{{! toolbar }}
+<h2>Add Forum</h2>
+<hr />
+
   <div class="well">
     {{#flash}}
       <div class="alert">

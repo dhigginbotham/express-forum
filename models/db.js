@@ -125,7 +125,6 @@ var TopicSchema = new Schema({
 });
 
 TopicSchema.pre('save', function (next) {
-
   if(!this.isModified('name')) {
     return next();
   } else {
