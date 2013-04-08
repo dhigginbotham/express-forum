@@ -96,7 +96,7 @@ exports.get.view = function (req, res) {
   Route: :f/view
   Method: Get
   */
-  User.find({}, function(err, docs) {
+  User.find().sort({'created': -1}).exec(function(err, docs) {
     if (req.query.json) {
       if (!err) {
         res.send(docs);

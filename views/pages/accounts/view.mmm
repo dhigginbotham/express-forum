@@ -11,4 +11,4 @@
     </div>
   </div>
 </div>
-<a href="/a/view/{{docs.username}}?json=true" class="btn btn-primary btn-small">Switch to JSON View</a>
+{{#user.admin}}<a href="/a/view/{{docs.username}}?json=true" class="btn btn-primary btn-small">Switch to JSON View</a>{{/user.admin}}

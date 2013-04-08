@@ -22,7 +22,7 @@ routes.get.view = function (req, res) {
     __q = {_parent: req.route.params.fid};
   }
 
-  Topic.find(__q).populate('user _parent').exec( function (err, docs) {
+  Topic.find(__q).sort({'created': -1}).populate('user _parent').exec( function (err, docs) {
     if (req.query.json) {
       if (!err) {
         res.send(docs);
@@ -58,7 +58,7 @@ routes.get.viewSingle = function (req, res) {
     __q = {_id: req.route.params.tid};
   }
 
-  Topic.find(__q).populate('user _parent').exec( function (err, docs) {
+  Topic.find(__q).sort({'created': -1}).populate('user _parent').exec( function (err, docs) {
     if (req.query.json) {
       if (!err) {
         res.send(docs);

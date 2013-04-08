@@ -7,6 +7,7 @@
 <div class="row">
   <div class="span3">
   {{>parts/my-sidebar}}
+  {{#user.admin}}<a href="/a/view/{{user._id}}?json=true" class="btn btn-primary btn-small">Switch to JSON View</a>{{/user.admin}}
   </div>
   <div class="span9">
     <ul class="nav nav-tabs">
@@ -57,7 +58,6 @@
           {{! messages soon }}
 
       </div>
-
     </div>
   </div>
 </div>

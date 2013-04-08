@@ -95,7 +95,7 @@ exports.get.view = function (req, res) {
   Route: :f/view
   Method: Get
   */
-    Forum.find({}).populate('user _parent').exec( function(err, docs) {
+    Forum.find().sort({'created': -1}).populate('user _parent').exec( function(err, docs) {
       if (req.query.json) {
         if (!err) {
           res.send(docs);

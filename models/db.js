@@ -103,6 +103,15 @@ UserSchema.methods.generateRandomToken = function () {
   define TopicSchema
 */
 
+var CommentSchema = new Schema({
+  _parent: [{ type: String, ref: 'Topic'}], //string 50
+  user: [{type: String, ref: 'User'}],
+  created: { type: Date, default: Date.now }, //datetime
+  updated: { type: Date }, //datetime
+  ip: { type: String, required: true },
+  message: { type: String, required: true } //text
+});
+
 var TopicSchema = new Schema({
   _id: { type: String, index: true }, //forum the msg is posted in
   _parent: [{ type: String, ref: 'Forum'}], //string 50
@@ -170,4 +179,5 @@ var MessageSchema = new Schema({
 var User = exports.User = mongoose.model('User', UserSchema);
 var Forum = exports.Forum = mongoose.model('Forum', ForumSchema);
 var Topic = exports.Topic = mongoose.model('Topic', TopicSchema);
+var Comment = exports.Comment = mongoose.model('Comment', CommentSchema);
 var Message = exports.Message = mongoose.model('Message', MessageSchema);
