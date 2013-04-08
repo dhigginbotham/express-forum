@@ -115,7 +115,7 @@ var CommentSchema = new Schema({
 var TopicSchema = new Schema({
   _id: { type: String, index: true }, //forum the msg is posted in
   _parent: [{ type: String, ref: 'Forum'}], //string 50
-  _child: [{ type: String, ref: 'Topic'}], //string 50
+  _child: [{ type: String, ref: 'Comment'}], //string 50
   user: [{type: String, ref: 'User'}], //user id
   name: { type: String, required: true }, //string 200
   created: { type: Date, default: Date.now }, //datetime

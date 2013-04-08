@@ -15,6 +15,7 @@ var controllers = require('./controllers'),
   user_routes = require('./controllers/user'),
   crud_routes = require('./controllers/crud'),
   topic_routes = require('./controllers/topics'),
+  comment_routes = require('./controllers/comments'),
   path = require('path');
 
 app.configure(function () {
@@ -64,6 +65,14 @@ app.get('/f/:fid/all', pass.ensureAuthenticated, topic_routes.get.view);
 
 app.post('/f/:fid/create', pass.ensureAuthenticated, topic_routes.post.create);
 app.get('/f/:fid/create', pass.ensureAuthenticated, topic_routes.get.create);
+
+// app.post('/f/:fid/:tid/create', pass.ensureAuthenticated, topic_routes.post.create);
+// app.get('/f/:fid/:tid/reply', pass.ensureAuthenticated, topic_routes.get.create);
+
+app.get('/f/:fid/:tid/reply', pass.ensureAuthenticated, comment_routes.get.new);
+app.post('/f/:fid/:tid/reply', pass.ensureAuthenticated, comment_routes.post.new);
+
+app.get('/f/:fid/:tid/comments', pass.ensureAuthenticated, comment_routes.get.view);
 
 app.get('/f/:fid/:tid/view', pass.ensureAuthenticated, topic_routes.get.viewSingle);
 

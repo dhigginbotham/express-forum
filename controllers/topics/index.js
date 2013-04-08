@@ -22,7 +22,7 @@ routes.get.view = function (req, res) {
     __q = {_parent: req.route.params.fid};
   }
 
-  Topic.find(__q).sort({'created': -1}).populate('user _parent').exec( function (err, docs) {
+  Topic.find(__q).sort({'created': -1}).populate('user _parent _child').exec( function (err, docs) {
     if (req.query.json) {
       if (!err) {
         res.send(docs);
@@ -58,7 +58,7 @@ routes.get.viewSingle = function (req, res) {
     __q = {_id: req.route.params.tid};
   }
 
-  Topic.find(__q).sort({'created': -1}).populate('user _parent').exec( function (err, docs) {
+  Topic.find(__q).sort({'created': -1}).populate('user _parent _child').exec( function (err, docs) {
     if (req.query.json) {
       if (!err) {
         res.send(docs);
@@ -125,9 +125,14 @@ routes.get.create = function (req, res) {
 
 routes.post.create = function (req, res) {
   var fid = [];
+  var tid = [];
 
   if (req.route.params.fid) {
     fid.push(req.route.params.fid);
+  }
+
+  if (req.route.params.tid) {
+    tid.push(req.route.params.tid);
   }
 
   var topic = new Topic({
@@ -135,7 +140,8 @@ routes.post.create = function (req, res) {
     ip: req.ip,
     message: req.body.topic_desc,
     user: req.user._id,
-    _parent: fid
+    _parent: fid,
+    _child: tid
   });
 
   topic.save(function (err) {

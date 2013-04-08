@@ -2,7 +2,7 @@
 {{> parts/navi }}
 
 {{! toolbar }}
-<a href="#reply" class="btn btn-primary pull-right"><i class="icon-plus"></i> Reply</a>
+<a href="reply" class="btn btn-primary pull-right"><i class="icon-plus"></i> Reply</a>
 {{#docs}}<h3>{{#_parent}}{{name}}{{/_parent}} - {{name}}</h3>{{/docs}}
 <hr />
 
@@ -26,6 +26,6 @@
 </div>
 <hr />
 <div class="well">
-  <a href="#reply" class="btn">Quick Reply</a>
+  <a href="reply" class="btn">Quick Reply</a>
 </div>
 
