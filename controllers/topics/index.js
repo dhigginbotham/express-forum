@@ -22,7 +22,7 @@ routes.get.view = function (req, res) {
   if (req.route.params.fid) {
     __q = {_parent: req.route.params.fid};
   }
-  Topic.find(__q).sort({'created': -1}).populate('user _parent _child').exec( function (err, docs) {
+  Topic.find(__q).sort({'created': -1}).populate('user _parent').exec( function (err, docs) {
     if (req.query.json) {
       if (!err) {
         res.send(docs);
@@ -58,10 +58,11 @@ routes.get.viewSingle = function (req, res) {
     __q = {_parent: req.route.params.tid};
   }
 
-  Comment.find(__q).sort({'created': -1}).populate('user _parent').exec( function (err, docs) {
+  Comment.find(__q)/*.sort({'created': -1})*/.populate('user _parent').exec( function (err, docs) {
     if (req.query.json) {
       if (!err) {
       } else {
+        console.log(err);
         req.session.messages = 'something bad happened';
       }
     } else {
@@ -78,7 +79,7 @@ routes.get.viewSingle = function (req, res) {
             },
             nav: gator,
             user: req.user,
-            docs: docs
+            docs: docs,
           });
         });
       });
@@ -147,11 +148,11 @@ routes.post.create = function (req, res) {
     if (err) {
       console.log(err);
       req.session.messages = JSON.stringify(err);
-      res.redirect('#error');
+      res.redirect(req.originalUrl + '#error');
       delete req.session.messages;
     } else {
       req.session.messages = 'awesome you added a topic!';
-      res.redirect('#success');
+      res.redirect(req.originalUrl + '#success');
       delete req.session.messages;
     }
   });

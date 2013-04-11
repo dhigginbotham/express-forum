@@ -3,29 +3,46 @@
 
 {{! toolbar }}
 <a href="reply" class="btn btn-primary pull-right"><i class="icon-plus"></i> Reply</a>
-{{#docs}}<h3>{{#_parent}}{{name}}{{/_parent}} - {{name}}</h3>{{/docs}}
+{{#_parent}}<h3>{{name}}</h3>{{/_parent}}
 <hr />
 
-<div class="row">
+<div class="row" style="min-height: 200px;">
+{{#docs.0.user}}
   <div class="span3">
-    {{#docs}}
+    <h4><a href="/a/view/{{username}}">{{username}}</a></h4>
+    {{#first_name}}<p>{{first_name}} {{last_name}}{{/first_name}}</p>
+    <p>Location: {{location}}</p>
+  </div>
+{{/docs.0.user}}
+{{#docs.0._parent}}
+  <div class="span9">
+    <h5>{{name}}&nbsp;<span class="small pull-right">{{created}}</span></h5>
+    <hr />
+    <p>{{{message}}}</p>
+  </div>
+{{/docs.0._parent}}
+</div>
+
+
+{{#docs}}
+<div class="row clearfix" style="min-height: 200px;">
+  <div class="span3">
       {{#user}}
         <h4><a href="/a/view/{{username}}">{{username}}</a></h4>
         {{#first_name}}<p>{{first_name}} {{last_name}}{{/first_name}}</p>
         <p>Location: {{location}}</p>
       {{/user}}
-    {{/docs}}
   </div>
   <div class="span9">
-    {{#docs}}
-    <h5>{{name}} <span class="small pull-right">{{created}}</span></h5>
+    <h5>{{name}}&nbsp;<span class="small pull-right">{{created}}</span></h5>
     <hr />
     <p>{{{message}}}</p>
-    {{/docs}}
   </div>
 </div>
+{{/docs}}
+
+
 <hr />
 <div class="well">
   <a href="reply" class="btn">Quick Reply</a>
 </div>
-

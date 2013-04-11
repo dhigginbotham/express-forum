@@ -45,11 +45,11 @@ _c.post.new = function (req, res) {
     if (err) {
       console.log(err);
       req.session.messages = JSON.stringify(err);
-      res.redirect('#error');
+      res.redirect(req.originalUrl + '#error');
       delete req.session.messages;
     } else {
       req.session.messages = 'awesome you added a topic!';
-      res.redirect('#success');
+      res.redirect(req.originalUrl + '#success');
       delete req.session.messages;
     }
   });
