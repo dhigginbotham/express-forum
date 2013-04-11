@@ -115,7 +115,7 @@ var CommentSchema = new Schema({
 var TopicSchema = new Schema({
   _id: { type: String, index: true }, //forum the msg is posted in
   _parent: [{ type: String, ref: 'Forum'}], //string 50
-  _child: [{ type: String, ref: 'Comment'}], //string 50
+  // _child: [{ type: String, ref: 'Comment'}], //string 50
   user: [{type: String, ref: 'User'}], //user id
   name: { type: String, required: true }, //string 200
   created: { type: Date, default: Date.now }, //datetime
@@ -139,7 +139,7 @@ TopicSchema.pre('save', function (next) {
 var ForumSchema = new Schema({
   _id: { type: String, index: true }, //++i
   _parent: [{ type: String, ref: 'Forum'}], //string 50
-  _child: [{ type: String, ref: 'Topic'}], //string 50
+  // _child: [{ type: String, ref: 'Topic'}], //string 50
   name: { type: String, required: true, unique: true }, //string 50
   desc: String, //string 255
   user: [{type: String, ref: 'User'}],

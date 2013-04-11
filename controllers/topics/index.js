@@ -8,6 +8,7 @@ var navi = require('../../lib/navi'); //load nav
 
 //require db model
 var Topic = require('../../models/db').Topic;
+var Comment = require('../../models/db').Comment;
 
 //build routes
 var routes = module.exports = {};
@@ -54,10 +55,10 @@ routes.get.viewSingle = function (req, res) {
   var __q = {};
   
   if (req.route.params.tid) {
-    __q = {_id: req.route.params.tid};
+    __q = {_parent: req.route.params.tid};
   }
 
-  Topic.find(__q).sort({'created': -1}).populate('user _parent _child').exec( function (err, docs) {
+  Comment.find(__q).sort({'created': -1}).populate('user _parent').exec( function (err, docs) {
     if (req.query.json) {
       if (!err) {
       } else {
