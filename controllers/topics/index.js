@@ -105,7 +105,7 @@ routes.commentQuery = function (req, res, cb) {
     __q = {_parent: req.route.params.tid};
   }
 
-  Comment.find(__q).sort({'created': -1}).populate('user _parent').exec( function (err, docs) {
+  Comment.find(__q).populate('user _parent').exec( function (err, docs) {
     if (req.query.json) {
 
       if (!err) {
@@ -128,7 +128,7 @@ routes.renderTopicsView = function (req, res, docs) {
     que.embed(req, function (queued) {
 
       res.render('pages/topics/single', {
-        title: docs[0].name,
+        title: docs.name,
         que: {
           head: queued.head,
           foot: queued.foot

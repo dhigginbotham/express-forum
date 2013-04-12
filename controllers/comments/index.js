@@ -41,7 +41,7 @@ _c.post.new = function (req, res) {
     _parent: tid
   });
 
-  comment.save(function (err) {
+  comment.save(function (err, t) {
     if (err) {
       console.log(err);
       req.session.messages = JSON.stringify(err);
@@ -49,7 +49,7 @@ _c.post.new = function (req, res) {
       delete req.session.messages;
     } else {
       req.session.messages = 'awesome you added a topic!';
-      res.redirect('/f/' + req.route.params.fid + '/' + t._id + '/view');
+      res.redirect('/f/' + req.route.params.fid + '/' + t._parent + '/view');
       delete req.session.messages;
     }
   });
