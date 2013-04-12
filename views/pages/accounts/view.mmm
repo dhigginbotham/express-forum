@@ -1,14 +1,29 @@
 {{>parts/navi}}
+<a href="#msg" class="btn btn-success btn-small pull-right"><i class="icon-envelope-alt"> </i>Send Message</a>
+<h2>{{docs.username}}'s Public Profile</h2>
 
 <div class="row">
   <div class="span3">
   {{>parts/sidebar}}
   </div>
   <div class="span9">
-    <div class="well">
-      <h2>{{docs.username}}'s profile</h2>
-      <p class="lead">Currently not active in any forums</p>
-    </div>
+
+    <hr />
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+      {{#comments}}
+        <tr>
+          {{#_parent}}<td><a href="/f/{{_parent}}/{{_id}}/view">{{name}}</a></td>{{/_parent}}
+        </tr>
+      {{/comments}}
+      </tbody>
+    </table>
+
   </div>
 </div>
 {{#user.admin}}<a href="/a/view/{{docs.username}}?json=true" class="btn btn-primary btn-small">Switch to JSON View</a>{{/user.admin}}

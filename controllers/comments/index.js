@@ -76,12 +76,12 @@ _c.get.new = function (req, res) {
   Method: GET
   */
 
-  Comment.find({}, function(err, docs) {
-    if (!err) {
-      var forums = docs;
-    } else {
-      var forums = null;
-    }
+  // Comment.find({}, function(err, docs) {
+  //   if (!err) {
+  //     var forums = docs;
+  //   } else {
+  //     var forums = null;
+  //   }
 
     //render js & css
     navi.gator(req, function (gator) {
@@ -102,7 +102,7 @@ _c.get.new = function (req, res) {
         });
       });
     });
-  });
+  // });
 };
 _c.get.delete = function (req, res) {
 

@@ -131,7 +131,8 @@ var TopicSchema = new Schema({
   created: { type: Date, default: Date.now }, //datetime
   updated: { type: Date }, //datetime
   ip: { type: String, required: true },
-  message: { type: String, required: true } //text
+  message: { type: String, required: true }, //text
+  display: { type: Boolean, required: true, default: true }
 });
 
 TopicSchema.pre('save', function (next) {

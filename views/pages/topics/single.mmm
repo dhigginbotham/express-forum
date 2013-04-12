@@ -10,11 +10,9 @@
 {{#docs}}
 <div class="row clearfix" style="min-height: 200px;">
   <div class="span3">
-      {{#user}}
-        <h4><a href="/a/view/{{username}}">{{username}}</a></h4>
-        {{#first_name}}<p>{{first_name}} {{last_name}}{{/first_name}}</p>
-        <p>Location: {{location}}</p>
-      {{/user}}
+    {{#user}}
+      <h4><a href="/a/view/{{username}}">{{username}}</a></h4>
+    {{/user}}
   </div>
   <div class="span9">
     <h5>{{name}}&nbsp;<span class="small pull-right">{{created}}</span></h5>

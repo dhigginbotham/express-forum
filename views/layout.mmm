@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{{title}}</title>
+    <title>RTF - {{title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="node.js forum app built on express, socket.io, mongoose, with a lot of js">
     <meta name="author" content="dhigginbotham - david@hillsoft.com">

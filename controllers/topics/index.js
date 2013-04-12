@@ -36,7 +36,7 @@ routes.get.view = function (req, res) {
         que.embed(req, function (queued) {
 
           res.render('pages/topics/list', {
-            title: 'xfm-beta ',
+            title: 'View Topics ',
             que: {
               head: queued.head,
               foot: queued.foot
@@ -128,7 +128,7 @@ routes.renderTopicsView = function (req, res, docs) {
     que.embed(req, function (queued) {
 
       res.render('pages/topics/single', {
-        title: 'xfm-beta ',
+        title: docs[0].name,
         que: {
           head: queued.head,
           foot: queued.foot
@@ -148,7 +148,7 @@ routes.renderCommentsView = function (req, res, docs) {
     que.embed(req, function (queued) {
 
       res.render('pages/topics/multi', {
-        title: 'xfm-beta ',
+        title: docs[0]._parent[0].name,
         que: {
           head: queued.head,
           foot: queued.foot
@@ -156,8 +156,7 @@ routes.renderCommentsView = function (req, res, docs) {
         nav: gator,
         user: req.user,
         docs: docs,
-        _parent: docs[0]._parent,
-        _user: docs[0].user
+        _parent: docs[0]._parent
       });
     });
   });
@@ -207,12 +206,12 @@ routes.get.create = function (req, res) {
   Method: Get
   */
 
-  Topic.find({}, function(err, docs) {
-    if (!err) {
-      var forums = docs;
-    } else {
-      var forums = null;
-    }
+  // Topic.find({}, function(err, docs) {
+  //   if (!err) {
+  //     var forums = docs;
+  //   } else {
+  //     var forums = null;
+  //   }
 
     //render js & css
     navi.gator(req, function (gator) {
@@ -220,7 +219,7 @@ routes.get.create = function (req, res) {
       que.embed(req, function (queued) {
 
         res.render('pages/topics/create', {
-          title: 'xfm-beta ',
+          title: 'Create New Topic ',
           que: {
             head: queued.head,
             foot: queued.foot
@@ -233,7 +232,7 @@ routes.get.create = function (req, res) {
         });
       });
     });
-  });
+  // });
 };
 
 routes.post.create = function (req, res) {
@@ -258,14 +257,15 @@ routes.post.create = function (req, res) {
 
   topic.save(function (err, t) {
     if (err) {
-      console.log(err);
       req.session.messages = JSON.stringify(err);
       res.redirect(req.originalUrl + '#error');
-      delete req.session.messages;
+
+      // delete req.session.messages;
     } else {
       req.session.messages = 'awesome you added a topic!';
       res.redirect('/f/' + req.route.params.fid + '/' + t._id + '/view');
-      delete req.session.messages;
+      
+      // delete req.session.messages;
     }
   });
 };

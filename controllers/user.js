@@ -7,6 +7,7 @@ var passport = require('passport');
 var crypto = require('crypto');
 
 var User = require('../models/db').User;
+var Comment = require('../models/db').Comment;
 var Forms = require('../models/forms');
 var Scripts = require('../models/scripts');
 
@@ -143,25 +144,30 @@ exports.get.viewUser = function (req, res) {
       }
     } else {
       if(!err) {
-        var email = docs[0].email;
-        var hash = crypto.createHash('md5').update(email).digest("hex");
+        Comment.find({user: req.user._id}).populate('_parent').exec(function (err, comments) {
 
-        var scripts = Scripts.files;
-        //render js & css
-        navi.gator(req, function (gator) {
+          var email = docs[0].email;
+          var hash = crypto.createHash('md5').update(email).digest("hex");
 
-          que.embed(req, function (queued) {
+          var scripts = Scripts.files;
 
-            res.render('pages/accounts/view', {
-              title: 'xfm-beta ',
-              que: {
-                head: queued.head,
-                foot: queued.foot
-              },
-              nav: gator,
-              user: req.user,
-              docs: docs[0],
-              hash: hash
+          //render js & css
+          navi.gator(req, function (gator) {
+
+            que.embed(req, function (queued) {
+
+              res.render('pages/accounts/view', {
+                title: 'xfm-beta ',
+                que: {
+                  head: queued.head,
+                  foot: queued.foot
+                },
+                nav: gator,
+                user: req.user,
+                docs: docs[0],
+                hash: hash,
+                comments: comments
+              });
             });
           });
         });
@@ -333,10 +339,10 @@ exports.get.uplift = function (req, res) {
 
   User.update({ _id: req.route.params.usr }, user, {safe: true}, function (err) {
     if (!err) {
-      return res.redirect('/a#settings');
+      res.redirect('/a#settings');
     } else {
-      req.session.messages = [info.message];
-      return res.redirect('/a');
+      // req.session.messages = [info.message];
+      res.redirect('/a');
     }
   });
 };
@@ -345,10 +351,10 @@ exports.get.delete = function (req, res) {
 
   User.remove({ _id: req.route.params.usr }, {safe: true}, function (err) {
     if (!err) {
-      return res.redirect('/a#settings');
+      res.redirect('/a#settings');
     } else {
-      req.session.messages = [info.message];
-      return res.redirect('/a');
+      // req.session.messages = [info.message];
+      res.redirect('/a');
     }
   });
 };

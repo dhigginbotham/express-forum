@@ -8,7 +8,12 @@
 
 {{#_parent}}
 <div class="row" style="min-height: 200px;">
-  <div class="span12">
+  <div class="span3">
+    {{#user}}
+      <h4><a href="/a/view/{{user}}">{{user}}</a></h4>
+    {{/user}}
+  </div>
+  <div class="span9">
     <h5>{{name}}&nbsp;<span class="small pull-right">{{created}}</span></h5>
     <hr />
     <p>{{{message}}}</p>
@@ -19,11 +24,9 @@
 {{#docs}}
 <div class="row clearfix" style="min-height: 200px;">
   <div class="span3">
-      {{#user}}
-        <h4><a href="/a/view/{{username}}">{{username}}</a></h4>
-        {{#first_name}}<p>{{first_name}} {{last_name}}{{/first_name}}</p>
-        <p>Location: {{location}}</p>
-      {{/user}}
+    {{#user}}
+      <h4><a href="/a/view/{{username}}">{{username}}</a></h4>
+    {{/user}}
   </div>
   <div class="span9">
     <h5>{{name}}&nbsp;<span class="small pull-right">{{created}}</span></h5>
@@ -35,5 +38,5 @@
 {{/docs}}
 
 <div class="well">
-  <a href="reply" class="btn">Quick Reply</a>
+  <a href="#reply" id="quickReply" class="btn">Quick Reply</a>
 </div>

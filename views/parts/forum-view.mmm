@@ -1,0 +1,22 @@
+{{#user.admin}}<a href="/f/create" class="btn pull-right"><i class="icon-plus"></i> New Forum</a>{{/user.admin}}
+<h2>Forums</h2>
+<hr />
+{{#docs}}
+<table class="table table-bordered table-striped">
+  <colgroup>
+    <col class="span8">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="{{_id}}/all">{{name}}</a></td>
+    </tr>
+  </tbody>
+</table>
+<hr />
+{{/docs}}
+{{#user.admin}}<a href="?json=true" class="btn btn-primary btn-small">Switch to JSON View</a>{{/user.admin}}
