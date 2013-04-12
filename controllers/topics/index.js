@@ -206,12 +206,12 @@ routes.get.create = function (req, res) {
   Method: Get
   */
 
-  // Topic.find({}, function(err, docs) {
-  //   if (!err) {
-  //     var forums = docs;
-  //   } else {
-  //     var forums = null;
-  //   }
+  Topic.find({}, function(err, docs) {
+    if (!err) {
+      var forums = docs;
+    } else {
+      var forums = null;
+    }
 
     //render js & css
     navi.gator(req, function (gator) {
@@ -232,7 +232,7 @@ routes.get.create = function (req, res) {
         });
       });
     });
-  // });
+  });
 };
 
 routes.post.create = function (req, res) {

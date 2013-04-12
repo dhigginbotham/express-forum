@@ -1,6 +1,6 @@
 {
   "name": "express-forum",
-  "version": "0.2.7-2",
+  "version": "0.2.7-3",
   "private": true,
   "scripts": {
     "start": "node app.js"
