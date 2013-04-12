@@ -52,40 +52,153 @@ routes.get.view = function (req, res) {
 };
 
 routes.get.viewSingle = function (req, res) {
+  routes.commentQuery(req, res, function(err, comment) {
+    if (err) {
+      req.session.messages = 'bad stuff here';
+      console.log(err);
+    }
+
+    if (comment.length < 1) {
+
+      routes.topicQuery(req, res, function(err, topic) {
+        if(err) return console.log('error getting topic');
+        routes.renderTopicsView(req, res, topic);
+      });
+
+    } else {
+
+      routes.renderCommentsView(req, res, comment);
+    }
+  }); 
+};
+
+routes.topicQuery = function (req, res, cb) {
+
+  var __q = {};
+  
+  if (req.route.params.tid) {
+    __q = {_id: req.route.params.tid};
+  }
+
+  Topic.find(__q).sort({'created': -1}).populate('user _parent').exec( function (err, docs) {
+    if (req.query.json) {
+
+      if (!err) {
+        res.send(docs);
+      } else {
+        req.session.messages = 'something bad happened';
+        cb(err);
+      }
+
+    } else {
+      cb(null, docs);
+    }
+
+  });
+};
+
+routes.commentQuery = function (req, res, cb) {
+
   var __q = {};
   
   if (req.route.params.tid) {
     __q = {_parent: req.route.params.tid};
   }
 
-  Comment.find(__q)/*.sort({'created': -1})*/.populate('user _parent').exec( function (err, docs) {
+  Comment.find(__q).sort({'created': -1}).populate('user _parent').exec( function (err, docs) {
     if (req.query.json) {
+
       if (!err) {
+        res.send(docs);
       } else {
-        console.log(err);
         req.session.messages = 'something bad happened';
+        cb(err);
       }
+
     } else {
-      //render js & css
-      navi.gator(req, function (gator) {
-
-        que.embed(req, function (queued) {
-
-          res.render('pages/topics/single', {
-            title: 'xfm-beta ',
-            que: {
-              head: queued.head,
-              foot: queued.foot
-            },
-            nav: gator,
-            user: req.user,
-            docs: docs,
-          });
-        });
-      });
+      cb(null, docs);
     }
-  }); 
+  });
 };
+
+routes.renderTopicsView = function (req, res, docs) {
+  //render js & css
+  navi.gator(req, function (gator) {
+
+    que.embed(req, function (queued) {
+
+      res.render('pages/topics/single', {
+        title: 'xfm-beta ',
+        que: {
+          head: queued.head,
+          foot: queued.foot
+        },
+        nav: gator,
+        user: req.user,
+        docs: docs,
+      });
+    });
+  });
+};
+
+routes.renderCommentsView = function (req, res, docs) {
+  //render js & css
+  navi.gator(req, function (gator) {
+
+    que.embed(req, function (queued) {
+
+      res.render('pages/topics/multi', {
+        title: 'xfm-beta ',
+        que: {
+          head: queued.head,
+          foot: queued.foot
+        },
+        nav: gator,
+        user: req.user,
+        docs: docs,
+        _parent: docs[0]._parent,
+        _user: docs[0].user
+      });
+    });
+  });
+};
+
+// routes.get.viewSingle = function (req, res) {
+//   var __q = {};
+  
+//   if (req.route.params.tid) {
+//     __q = {_parent: req.route.params.tid};
+//   }
+
+//   Comment.find(__q)/*.sort({'created': -1})*/.populate('user _parent').exec( function (err, docs) {
+//     if (req.query.json) {
+//       if (!err) {
+//         res.send(docs);
+//       } else {
+//         console.log(err);
+//         req.session.messages = 'something bad happened';
+//       }
+//     } else {
+//       //render js & css
+//       navi.gator(req, function (gator) {
+
+//         que.embed(req, function (queued) {
+
+//           res.render('pages/topics/single', {
+//             title: 'xfm-beta ',
+//             que: {
+//               head: queued.head,
+//               foot: queued.foot
+//             },
+//             nav: gator,
+//             user: req.user,
+//             docs: docs,
+//           });
+//         });
+//       });
+//     }
+//   }); 
+// };
 
 routes.get.create = function (req, res) {
 
@@ -140,11 +253,10 @@ routes.post.create = function (req, res) {
     ip: req.ip,
     message: req.body.topic_desc,
     user: req.user._id,
-    _parent: fid,
-    _child: tid
+    _parent: fid
   });
 
-  topic.save(function (err) {
+  topic.save(function (err, t) {
     if (err) {
       console.log(err);
       req.session.messages = JSON.stringify(err);
@@ -152,7 +264,7 @@ routes.post.create = function (req, res) {
       delete req.session.messages;
     } else {
       req.session.messages = 'awesome you added a topic!';
-      res.redirect(req.originalUrl + '#success');
+      res.redirect('/f/' + req.route.params.fid + '/' + t._id + '/view');
       delete req.session.messages;
     }
   });

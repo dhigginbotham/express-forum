@@ -49,7 +49,7 @@ _c.post.new = function (req, res) {
       delete req.session.messages;
     } else {
       req.session.messages = 'awesome you added a topic!';
-      res.redirect(req.originalUrl + '#success');
+      res.redirect('/f/' + req.route.params.fid + '/' + t._id + '/view');
       delete req.session.messages;
     }
   });

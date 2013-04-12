@@ -87,6 +87,16 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
   });
 };
 
+//needs work
+UserSchema.methods.updateAccount = function (currentDate, cb) {
+
+  var user = this;
+
+  user.updatedOn = currentDate;
+
+  cb(null, user);
+};
+
 // Remember Me implementation helper method
 UserSchema.methods.generateRandomToken = function () {
   var user = this,

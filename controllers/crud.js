@@ -13,17 +13,6 @@ var Forum = require('../models/db').Forum;
 exports.post = {};
 exports.get = {};
 
-/**
-var ForumSchema = new Schema({
-  id: { type: ObjectId, index: true }, //++i
-  name: { type: String, required: true }, //string 50
-  slug: String, //string 50
-  desc: String, //string 255
-  updated: { type: Date, default: Date.now }, //datetime
-  created: { type: Date, default: Date.now } //datetime
-});
-*/
-
 exports.get.create = function (req, res) {
 
   /**
